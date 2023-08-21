@@ -30,7 +30,7 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "dir",
+                    "type" : "dirt",
                     "url" : "."
                 }
             ]

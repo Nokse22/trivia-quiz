@@ -77,15 +77,22 @@ class TriviaWindow(Adw.ApplicationWindow):
         menu.append(_("Keyboard shortcuts"), "win.show-help-overlay")
         menu.append(_("About Trivia"), "app.about")
         menu_button.set_menu_model(menu)
-        self.headerbar.pack_start(menu_button)
+        self.headerbar.pack_end(menu_button)
+
+        self.back_button = Gtk.Button(icon_name="go-previous-symbolic")
+        self.back_button.connect("clicked", self.on_back_button_clicked)
+        self.back_button.set_sensitive(False)
+        self.headerbar.pack_start(self.back_button)
 
         self.set_title("")
         self.set_default_size(600, 800)
-        self.set_size_request(300, 400)
+        self.set_size_request(400, 600)
         self.first_box.append(self.headerbar)
         self.clamp = Adw.Clamp(margin_start=20, margin_end=20, tightening_threshold=600, maximum_size=800)
         self.handle = Gtk.WindowHandle(margin_bottom=10, vexpand=True)
-        self.handle.set_child(self.clamp)
+        self.toast_overlay = Adw.ToastOverlay()
+        self.toast_overlay.set_child(self.clamp)
+        self.handle.set_child(self.toast_overlay)
         self.first_box.append(self.handle)
 
         self.categories = [["Any category", None]]
@@ -95,6 +102,21 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.selected_category = ""
         self.selected_type = ""
 
+        self.set_start_page()
+
+        self.questions = []
+
+        self.token = self.get_open_trivia_token()
+
+        # thread = threading.Thread(target=self.get_new_trivia_questions, args=(4, self.selected_category, self.selected_difficulty, self.selected_type))
+        # thread.start()
+
+    def on_back_button_clicked(self, btn):
+        self.questions = []
+        self.set_start_page()
+        self.back_button.set_sensitive(False)
+
+    def set_start_page(self):
         self.start_page = Gtk.Box(orientation=1, vexpand=True)
 
         self.start_page.append(Gtk.Label(label="Trivia", css_classes=["large-title"]))
@@ -119,7 +141,21 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.clamp.set_child(self.start_page)
         self.set_content(self.first_box)
 
-        self.questions = []
+    def get_open_trivia_token(self):
+        token_url = "https://opentdb.com/api_token.php?command=request"
+
+        response = requests.get(token_url)
+        json_data = response.json()
+
+        if json_data.get("response_code") == 0:
+            return json_data.get("token")
+        else:
+            return None
+
+    def reset_open_trivia_token(self):
+        token_url = "https://opentdb.com/api_token.php?command=reset&token="
+
+        response = requests.get(token_url + self.token)
 
     def new_question_page(self):
         question = self.questions[0]
@@ -132,12 +168,16 @@ class TriviaWindow(Adw.ApplicationWindow):
         buttons = []
 
         if question.question_type == "multiple":
-            correct_button1 = Gtk.Button(label=question.correct_answer, vexpand=True, margin_top=10, margin_bottom=10)
+            label = Gtk.Label(label=question.correct_answer, vexpand=True, wrap=True)
+            correct_button1 = Gtk.Button(margin_top=10, margin_bottom=10)
+            correct_button1.set_child(label)
             buttons.append(correct_button1)
             correct_button1.connect("clicked", self.answer_selected, correct_button1)
 
             for answer in question.incorrect_answers:
-                button1 = Gtk.Button(label=html.unescape(answer), vexpand=True, margin_top=10, margin_bottom=10)
+                label = Gtk.Label(label=html.unescape(answer), vexpand=True, wrap=True)
+                button1 = Gtk.Button(margin_top=10, margin_bottom=10)
+                button1.set_child(label)
                 buttons.append(button1)
                 button1.connect("clicked", self.answer_selected, correct_button1)
         else:
@@ -160,34 +200,45 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         if btn == correct_button:
             btn.add_css_class("success")
-            GLib.timeout_add(1000, self.next_question_page)
+            GLib.timeout_add(1500, self.next_question_page)
         else:
             btn.add_css_class("error")
             correct_button.add_css_class("success")
-            GLib.timeout_add(1000, self.next_question_page)
+            GLib.timeout_add(1500, self.next_question_page)
 
     def next_question_page(self):
         self.questions.pop(0)
-        if len(self.questions) < 5:
-            thread = threading.Thread(target=self.get_new_trivia_questions, args=(50, self.selected_category, self.selected_difficulty, self.selected_type))
+        print(len(self.questions))
+        if len(self.questions) == 0:
+            self.get_new_trivia_questions(1, self.selected_category, self.selected_difficulty, self.selected_type, self.token)
+            thread = threading.Thread(target=self.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
+            thread.start()
+        elif len(self.questions) < 2:
+            thread = threading.Thread(target=self.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
             thread.start()
         question_page = self.new_question_page()
         self.clamp.set_child(question_page)
 
     def on_start_button_clicked(self, btn):
+        self.back_button.set_sensitive(True)
         self.selected_difficulty = self.difficulty_row.get_selected_item().api_id
         self.selected_category = self.category_row.get_selected_item().api_id
         self.selected_type = self.type_row.get_selected_item().api_id
 
-        self.get_new_trivia_questions(50, self.selected_category, self.selected_difficulty, self.selected_type)
+        thread = threading.Thread(target=self.get_new_trivia_questions, args=(50, self.selected_category, self.selected_difficulty, self.selected_type))
+        thread.start()
+
+        if len(self.questions) == 0:
+            self.get_new_trivia_questions(1, self.selected_category, self.selected_difficulty, self.selected_type, self.token)
 
         self.first_question()
 
     def first_question(self):
         question_page = self.new_question_page()
+        self.amount = 50
         self.clamp.set_child(question_page)
 
-    def get_new_trivia_questions(self, amount=10, category=None, difficulty=None, question_type=None):
+    def get_new_trivia_questions(self, amount=10, category=None, difficulty=None, question_type=None, token=None):
         base_url = "https://opentdb.com/api.php"
 
         params = {}
@@ -200,13 +251,30 @@ class TriviaWindow(Adw.ApplicationWindow):
             params["difficulty"] = difficulty
         if question_type is not None:
             params["type"] = question_type
+        if question_type is not None:
+            params["token"] = token
 
         response = requests.get(base_url, params=params)
         data = response.json()
 
         try:
-            # data = json.loads(json_data)
             results = data.get("results", [])
+            response_code = data.get("response_code")
+
+            if response_code == 1:
+                if self.amount == 5:
+                    toast = Adw.Toast(title="The API returned no results")
+                    self.toast_overlay.add_toast(toast)
+                self.amount = 5
+                return
+            if response_code == 2:
+                toast = Adw.Toast(title="There was en error retrieving more questions")
+                self.toast_overlay.add_toast(toast)
+                return
+            if response_code == 3:
+                self.token = self.get_open_trivia_token()
+            elif response_code == 4:
+                self.token = self.reset_open_trivia_token()
 
             for result in results:
                 question_text = html.unescape(result.get("question"))

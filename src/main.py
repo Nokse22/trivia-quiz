@@ -58,6 +58,7 @@ class TriviaApplication(Adw.Application):
                                 website='https://github.com/Nokse22/trivia',
                                 issue_url='https://github.com/Nokse22/trivia/issues',
                                 developers=['Nokse'],
+                                license_type=Gtk.License.GPL_3_0,
                                 copyright='© 2023 Nokse')
         about.present()
 
