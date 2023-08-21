@@ -11,8 +11,9 @@ It uses the Open Trivia database.
   </p>
 
   <div align="center">
-  <img src="data/resources/screenshot 1.png" height="400"/>
-  <img src="data/resources/screenshot 2.png" height="400"/>
+  <img src="data/resources/screenshot 1.png" height="350"/>
+  <img src="data/resources/screenshot 2.png" height="350"/>
+  <img src="data/resources/screenshot 3.png" height="350"/>
   </div>
   
 ## Installation
