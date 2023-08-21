@@ -1,4 +1,4 @@
-<img height="128" src="data/icons/hicolor/scalable/apps/io.github.nokse22.teleprompter.svg" align="left"/> 
+<img height="128" src="data/icons/hicolor/scalable/apps/io.github.nokse22.trivia.svg" align="left"/> 
   
  # Trivia 
   [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
