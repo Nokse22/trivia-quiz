@@ -51,10 +51,12 @@ class TriviaApplication(Adw.Application):
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='trivia',
+                                application_name='Trivia',
                                 application_icon='io.github.nokse22.trivia',
                                 developer_name='Nokse',
                                 version='0.1.0',
+                                website='https://github.com/Nokse22/trivia',
+                                issue_url='https://github.com/Nokse22/trivia/issues',
                                 developers=['Nokse'],
                                 copyright='© 2023 Nokse')
         about.present()

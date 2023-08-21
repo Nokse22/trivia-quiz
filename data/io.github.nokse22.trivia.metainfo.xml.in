@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
+  <name>Trivia</name>
+  <developer_name>Nokse</developer_name>
 	<id>io.github.nokse22.trivia.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
+  <summary>Respond to endless questions</summary>
 	<description>
-	  <p>No description</p>
+	  <p>This app let's you respond to an endless stream of questions.
+It uses Open Trivia database.
+	  </p>
 	</description>
+  <content_rating type="oars-1.0"></content_rating>
+  <launchable type="desktop-id">io.github.nokse22.trivia.desktop</launchable>
+
+  <url type="homepage">https://github.com/Nokse22/trivia</url>
+  <url type="bugtracker">https://github.com/Nokse22/trivia/issues</url>
+
+  <releases>
+    <release version="0.1.0" date="2023-08-22">
+		  <description>
+			  <p>First release!</p>
+		  </description>
+	  </release>
+  </releases>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/Nokse22/trivia/master/data/resources/screenshot%201.png</image>
+    </screenshot>
+
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/trivia/master/data/resources/screenshot%202.png</image>
+	  </screenshot>
+
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/trivia/master/data/resources/screenshot%203.png</image>
+	  </screenshot>
+  </screenshots>
+
 </component>

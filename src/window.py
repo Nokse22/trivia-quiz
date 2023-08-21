@@ -69,6 +69,16 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.first_box = Gtk.Box(orientation=1)
         self.headerbar = Adw.HeaderBar(css_classes=["flat"])
+
+        menu_button = Gtk.MenuButton()
+        menu_button.set_icon_name("open-menu-symbolic")
+        menu = Gio.Menu()
+        # menu.append(_("Preferences"), "app.preferences")
+        menu.append(_("Keyboard shortcuts"), "win.show-help-overlay")
+        menu.append(_("About Trivia"), "app.about")
+        menu_button.set_menu_model(menu)
+        self.headerbar.pack_start(menu_button)
+
         self.set_title("")
         self.set_default_size(600, 800)
         self.set_size_request(300, 400)
@@ -234,7 +244,6 @@ class TriviaWindow(Adw.ApplicationWindow):
         return category_names
 
     def new_combo_row_from_strings(self, name, strings):
-        print(strings)
         model_widget = Gio.ListStore(item_type=ListString)
         sort_model_widget  = Gtk.SortListModel(model=model_widget)
         filter_model_widget = Gtk.FilterListModel(model=sort_model_widget)
