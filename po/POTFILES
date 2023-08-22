@@ -1,6 +1,6 @@
-data/io.github.nokse22.trivia.desktop.in
-data/io.github.nokse22.trivia.metainfo.xml.in
-data/io.github.nokse22.trivia.gschema.xml
+data/io.github.nokse22.triviaquiz.desktop.in
+data/io.github.nokse22.triviaquiz.metainfo.xml.in
+data/io.github.nokse22.triviaquiz.gschema.xml
 src/main.py
 src/window.py
 src/window.ui

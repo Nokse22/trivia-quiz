@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Trivia
-Exec=trivia
-Icon=io.github.nokse22.trivia
-Terminal=false
-Type=Application
-Categories=Trivia;GTK;Game;Quiz;Entertainment;
-Keywords=Trivia;Quiz;Game;Entertainment;
-StartupNotify=true

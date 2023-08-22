@@ -75,7 +75,7 @@ class TriviaWindow(Adw.ApplicationWindow):
         menu = Gio.Menu()
         # menu.append(_("Preferences"), "app.preferences")
         menu.append(_("Keyboard shortcuts"), "win.show-help-overlay")
-        menu.append(_("About Trivia"), "app.about")
+        menu.append(_("About Trivia Quiz"), "app.about")
         menu_button.set_menu_model(menu)
         self.headerbar.pack_end(menu_button)
 
@@ -112,7 +112,7 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.back_button.set_sensitive(False)
         self.no_connectio_page = Gtk.Box(orientation=1, vexpand=True)
 
-        self.no_connectio_page.append(Gtk.Label(label="Trivia", css_classes=["large-title"], valign=Gtk.Align.CENTER, vexpand=True))
+        self.no_connectio_page.append(Gtk.Label(label="Trivia Quiz", css_classes=["large-title"], valign=Gtk.Align.CENTER, vexpand=True))
 
         status_page = Adw.StatusPage(title="No Connection", description="It seems there is no internet connection",
                 icon_name="network-wireless-offline-symbolic", vexpand=True)
@@ -145,7 +145,7 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.start_page = Gtk.Box(orientation=1, vexpand=True)
 
-        self.start_page.append(Gtk.Label(label="Trivia", css_classes=["large-title"], valign=Gtk.Align.CENTER, vexpand=True))
+        self.start_page.append(Gtk.Label(label="Trivia Quiz", css_classes=["large-title"], valign=Gtk.Align.CENTER, vexpand=True))
 
         self.difficulty_row = self.new_combo_row_from_strings("Difficulty", [["Any difficulty", None], ["Easy", "easy"], ["Medium", "medium"], ["Hard", "hard"]])
         self.category_row = self.new_combo_row_from_strings("Category", self.categories)

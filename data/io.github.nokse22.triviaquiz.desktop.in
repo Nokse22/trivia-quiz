@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Trivia Quiz
+Exec=triviaquiz
+Icon=io.github.nokse22.triviaquiz
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;System;CPU;Distro;Motherboard;RAM;Memory;Info;
+Keywords=GNOME;GTK;System;CPU;Distro;Motherboard;RAM;Memory;Info;
+StartupNotify=true
