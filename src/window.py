@@ -96,11 +96,11 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.first_box.append(self.handle)
 
         self.categories = [["Any category", None]]
-        self.categories += self.get_categories()
 
         self.selected_difficulty = ""
         self.selected_category = ""
         self.selected_type = ""
+        self.amount = 50
 
         self.set_start_page()
 
@@ -108,8 +108,28 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.token = self.get_open_trivia_token()
 
-        # thread = threading.Thread(target=self.get_new_trivia_questions, args=(4, self.selected_category, self.selected_difficulty, self.selected_type))
-        # thread.start()
+    def set_no_connection_page(self):
+        self.back_button.set_sensitive(False)
+        self.no_connectio_page = Gtk.Box(orientation=1, vexpand=True)
+
+        self.no_connectio_page.append(Gtk.Label(label="Trivia", css_classes=["large-title"], valign=Gtk.Align.CENTER, vexpand=True))
+
+        status_page = Adw.StatusPage(title="No Connection", description="It seems there is no internet connection",
+                icon_name="network-wireless-offline-symbolic", vexpand=True)
+        self.no_connectio_page.append(status_page)
+        self.retry_button = Gtk.Button(label="Retry", css_classes=["pill", "suggested-action"],
+                halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER, vexpand=True, margin_bottom=65)
+        self.retry_button.connect("clicked", self.on_retry_button_clicked)
+        self.no_connectio_page.append(self.retry_button)
+
+        self.clamp.set_child(self.no_connectio_page)
+        self.set_content(self.first_box)
+
+    def on_retry_button_clicked(self, btn):
+        code = self.set_start_page()
+        if code == 0:
+            toast = Adw.Toast(title="Still No Connection")
+            self.toast_overlay.add_toast(toast)
 
     def on_back_button_clicked(self, btn):
         self.questions = []
@@ -117,15 +137,21 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.back_button.set_sensitive(False)
 
     def set_start_page(self):
+        new_categories = self.get_categories()
+        if new_categories == 0:
+            self.set_no_connection_page()
+            return 0
+        self.categories += new_categories
+
         self.start_page = Gtk.Box(orientation=1, vexpand=True)
 
-        self.start_page.append(Gtk.Label(label="Trivia", css_classes=["large-title"]))
+        self.start_page.append(Gtk.Label(label="Trivia", css_classes=["large-title"], valign=Gtk.Align.CENTER, vexpand=True))
 
         self.difficulty_row = self.new_combo_row_from_strings("Difficulty", [["Any difficulty", None], ["Easy", "easy"], ["Medium", "medium"], ["Hard", "hard"]])
         self.category_row = self.new_combo_row_from_strings("Category", self.categories)
         self.type_row = self.new_combo_row_from_strings("Type", [["Any type", None], ["Multiple Choice", "multiple"], ["True or False", "boolean"]])
 
-        self.settings_list = Gtk.ListBox(selection_mode=0, css_classes=["navigation-sidebar"])
+        self.settings_list = Gtk.ListBox(selection_mode=0, css_classes=["navigation-sidebar"], valign=Gtk.Align.CENTER, vexpand=True)
 
         self.start_page.append(self.settings_list)
 
@@ -134,7 +160,7 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.settings_list.append(self.type_row)
 
         self.start_button = Gtk.Button(label="Start", css_classes=["pill", "suggested-action"],
-                halign=Gtk.Align.CENTER, valign=Gtk.Align.END, vexpand=True, margin_bottom=20)
+                halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER, vexpand=True, margin_bottom=40)
         self.start_button.connect("clicked", self.on_start_button_clicked)
         self.start_page.append(self.start_button)
 
@@ -144,7 +170,12 @@ class TriviaWindow(Adw.ApplicationWindow):
     def get_open_trivia_token(self):
         token_url = "https://opentdb.com/api_token.php?command=request"
 
-        response = requests.get(token_url)
+        try:
+            response = requests.get(token_url)
+        except Exception as e:
+            print(e)
+            return 0
+
         json_data = response.json()
 
         if json_data.get("response_code") == 0:
@@ -155,10 +186,18 @@ class TriviaWindow(Adw.ApplicationWindow):
     def reset_open_trivia_token(self):
         token_url = "https://opentdb.com/api_token.php?command=reset&token="
 
-        response = requests.get(token_url + self.token)
+        try:
+            response = requests.get(token_url + self.token)
+        except Exception as e:
+            print(e)
+            return 0
+
 
     def new_question_page(self):
-        question = self.questions[0]
+        try:
+            question = self.questions[0]
+        except:
+            return 0
 
         question_box = Gtk.Box(orientation=1, vexpand=True, homogeneous=True)
         question_box.append(Gtk.Label(label=question.question_text, css_classes=["large-title"], wrap=True, margin_bottom=10))
@@ -195,7 +234,10 @@ class TriviaWindow(Adw.ApplicationWindow):
         return question_box
 
     def answer_selected(self, btn, correct_button):
-        question = self.questions[0]
+        try:
+            question = self.questions[0]
+        except:
+            return
         answer = btn.get_label()
 
         if btn == correct_button:
@@ -210,7 +252,10 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.questions.pop(0)
         print(len(self.questions))
         if len(self.questions) == 0:
-            self.get_new_trivia_questions(1, self.selected_category, self.selected_difficulty, self.selected_type, self.token)
+            code = self.get_new_trivia_questions(1, self.selected_category, self.selected_difficulty, self.selected_type, self.token)
+            if code == 0:
+                self.set_no_connection_page()
+                return
             thread = threading.Thread(target=self.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
             thread.start()
         elif len(self.questions) < 2:
@@ -225,7 +270,7 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.selected_category = self.category_row.get_selected_item().api_id
         self.selected_type = self.type_row.get_selected_item().api_id
 
-        thread = threading.Thread(target=self.get_new_trivia_questions, args=(50, self.selected_category, self.selected_difficulty, self.selected_type))
+        thread = threading.Thread(target=self.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
         thread.start()
 
         if len(self.questions) == 0:
@@ -234,8 +279,12 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.first_question()
 
     def first_question(self):
-        question_page = self.new_question_page()
-        self.amount = 50
+        code = question_page = self.new_question_page()
+        if code == 0:
+            toast = Adw.Toast(title="There is no connection")
+            self.toast_overlay.add_toast(toast)
+            self.set_no_connection_page()
+            return
         self.clamp.set_child(question_page)
 
     def get_new_trivia_questions(self, amount=10, category=None, difficulty=None, question_type=None, token=None):
@@ -254,7 +303,12 @@ class TriviaWindow(Adw.ApplicationWindow):
         if question_type is not None:
             params["token"] = token
 
-        response = requests.get(base_url, params=params)
+        try:
+            response = requests.get(base_url, params=params)
+        except Exception as e:
+            print(e)
+            return 0
+
         data = response.json()
 
         try:
@@ -292,7 +346,13 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     def get_categories(self):
         base_url = "https://opentdb.com/api_category.php"
-        response = requests.get(base_url)
+
+        try:
+            response = requests.get(base_url)
+        except Exception as e:
+            print(e)
+            return 0
+
         json_data = response.json()
 
         category_names = []
