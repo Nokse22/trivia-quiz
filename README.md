@@ -5,10 +5,9 @@
   [![made-with-python](https://img.shields.io/badge/Made%20with-Python-ff7b3f.svg)](https://www.python.org/)
   [![Downloads](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=Flathub%20Downloads&query=%24.installs_total&url=https%3A%2F%2Fflathub.org%2Fapi%2Fv2%2Fstats%2Fio.github.nokse22.trivia)](https://flathub.org/apps/details/io.github.nokse22.trivia)
 
-<p>
+
 This app let's you respond to an endless stream of questions.
-It uses the Open Trivia database.
-  </p>
+It uses the [Open Trivia database](https://opentdb.com). 
 
   <div align="center">
   <img src="data/resources/screenshot 1.png" height="320"/>
