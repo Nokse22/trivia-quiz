@@ -26,7 +26,6 @@ gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gio, Adw
 from .window import TriviaWindow
 
-
 class TriviaApplication(Adw.Application):
     """The main application singleton class."""
 

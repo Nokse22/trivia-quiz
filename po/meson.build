@@ -1,1 +1,1 @@
-i18n.gettext('trivia', preset: 'glib')
+i18n.gettext('trivia-quiz', preset: 'glib')

@@ -1,9 +1,9 @@
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
-moduledir = pkgdatadir / 'trivia'
+moduledir = pkgdatadir / 'trivia_quiz'
 gnome = import('gnome')
 
-gnome.compile_resources('trivia',
-  'trivia.gresource.xml',
+gnome.compile_resources('trivia-quiz',
+  'trivia-quiz.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -12,14 +12,14 @@ gnome.compile_resources('trivia',
 python = import('python')
 
 conf = configuration_data()
-conf.set('PYTHON', python.find_installation('python3').path())
+conf.set('PYTHON', python.find_installation('python3').full_path())
 conf.set('VERSION', meson.project_version())
 conf.set('localedir', get_option('prefix') / get_option('localedir'))
 conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
-  input: 'trivia.in',
-  output: 'trivia',
+  input: 'trivia-quiz.in',
+  output: 'trivia-quiz',
   configuration: conf,
   install: true,
   install_dir: get_option('bindir'),

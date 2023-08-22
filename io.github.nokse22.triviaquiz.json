@@ -3,7 +3,7 @@
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "44",
     "sdk" : "org.gnome.Sdk",
-    "command" : "trivia",
+    "command" : "trivia-quiz",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -25,12 +25,12 @@
     "modules" : [
     	"python3-requests.json",
         {
-            "name" : "trivia",
+            "name" : "trivia-quiz",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "dirt",
+                    "type" : "dir",
                     "url" : "."
                 }
             ]
