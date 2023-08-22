@@ -7,7 +7,7 @@
 
 <p>
 This app let's you respond to an endless stream of questions.
-It uses the Open Trivia database.
+It uses the [Open Trivia database](https://opentdb.com/).
   </p>
 
   <div align="center">
