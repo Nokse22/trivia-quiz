@@ -100,7 +100,7 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.selected_difficulty = ""
         self.selected_category = ""
         self.selected_type = ""
-        self.amount = 50
+        self.amount = 20
 
         self.set_start_page()
 
