@@ -86,7 +86,7 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.set_title("")
         self.set_default_size(600, 800)
-        self.set_size_request(400, 600)
+        self.set_size_request(400, 700)
         self.first_box.append(self.headerbar)
         self.clamp = Adw.Clamp(margin_start=20, margin_end=20, tightening_threshold=600, maximum_size=800)
         self.handle = Gtk.WindowHandle(margin_bottom=10, vexpand=True)
@@ -201,11 +201,19 @@ class TriviaWindow(Adw.ApplicationWindow):
         except:
             return 0
 
-        question_box = Gtk.Box(orientation=1, vexpand=True, homogeneous=True)
-        question_box.append(Gtk.Label(label=question.question_text, css_classes=["large-title"], wrap=True, margin_bottom=10))
+        question_page = Gtk.Box(orientation=1, vexpand=True, homogeneous=True)
+        question_box = Gtk.Box(orientation=1, vexpand=True)
+        details_box = Gtk.Box()
+        if self.selected_category == None:
+            details_box.append(Gtk.Label(label=question.category.capitalize(), hexpand=True, ellipsize=3))
+        if self.selected_difficulty == None:
+            details_box.append(Gtk.Label(label=question.difficulty.capitalize(), hexpand=True))
+        question_box.append(details_box)
+        question_box.append(Gtk.Label(label=question.question_text, css_classes=["large-title"], wrap=True, margin_bottom=10, vexpand=True))
+        question_page.append(question_box)
 
         answer_box = Gtk.Box(orientation=1, vexpand=True)
-        question_box.append(answer_box)
+        question_page.append(answer_box)
         buttons = []
 
         if question.question_type == "multiple":
@@ -233,7 +241,7 @@ class TriviaWindow(Adw.ApplicationWindow):
         for button in buttons:
             answer_box.append(button)
 
-        return question_box
+        return question_page
 
     def answer_selected(self, btn, correct_button):
         if self.has_responded:
