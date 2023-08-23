@@ -1,0 +1,46 @@
+name: trivia-quiz 
+base: core22 
+adopt-info: trivia-quiz
+grade: stable 
+confinement: strict 
+website: https://github.com/Nokse22/trivia-quiz
+license: GPL-3.0
+source-code: https://github.com/Nokse22/trivia-quiz
+issues: https://github.com/Nokse22/trivia-quiz/issues
+contact: https://github.com/Nokse22/trivia-quiz
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+  - build-on: armhf
+
+parts:
+  trivia-quiz:
+    plugin: meson
+    source: https://github.com/Nokse22/trivia-quiz.git
+    source-depth: 1
+    parse-info: [ usr/share/metainfo/io.github.nokse22.triviaquiz.metainfo.xml ]
+    build-packages:
+      - blueprint-compiler
+    meson-parameters:
+      - --prefix=/snap/trivia-quiz/current/usr
+    override-build: |
+      craftctl default
+      sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/trivia-quiz/current/usr/bin/trivia-quiz
+      chmod +x $CRAFT_PART_INSTALL/snap/trivia-quiz/current/usr/bin/trivia-quiz
+    organize:
+      snap/trivia-quiz/current: .
+
+slots:
+  trivia-quiz:
+    interface: dbus
+    bus: session
+    name: io.github.nokse22.triviaquiz
+
+apps:
+  trivia-quiz:
+    command: usr/bin/trivia-quiz
+    extensions: [ gnome ]
+    common-id: io.github.nokse22.triviaquiz
+    desktop: usr/share/applications/io.github.nokse22.triviaquiz.desktop
+    plugs:
+      - network
