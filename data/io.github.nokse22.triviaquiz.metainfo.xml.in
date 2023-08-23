@@ -18,6 +18,11 @@ It uses Open Trivia database.
   <url type="bugtracker">https://github.com/Nokse22/trivia-quiz/issues</url>
 
   <releases>
+    <release version="0.1.1" date="2023-08-22">
+		  <description>
+			  <p>Rename the app to trivia-quiz</p>
+		  </description>
+	  </release>
     <release version="0.1.0" date="2023-08-22">
 		  <description>
 			  <p>First release!</p>
