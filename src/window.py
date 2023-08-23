@@ -108,6 +108,8 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.token = self.get_open_trivia_token()
 
+        self.has_responded = False
+
     def set_no_connection_page(self):
         self.back_button.set_sensitive(False)
         self.no_connectio_page = Gtk.Box(orientation=1, vexpand=True)
@@ -234,6 +236,9 @@ class TriviaWindow(Adw.ApplicationWindow):
         return question_box
 
     def answer_selected(self, btn, correct_button):
+        if self.has_responded:
+            return
+        self.has_responded = True
         try:
             question = self.questions[0]
         except:
@@ -249,6 +254,7 @@ class TriviaWindow(Adw.ApplicationWindow):
             GLib.timeout_add(1500, self.next_question_page)
 
     def next_question_page(self):
+        self.has_responded = False
         self.questions.pop(0)
         print(len(self.questions))
         if len(self.questions) == 0:
