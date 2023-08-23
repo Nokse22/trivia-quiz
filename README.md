@@ -30,7 +30,7 @@ Trivia Quiz is available to download on Flathub and the Snap Store.
 You just need to clone the repository
 
 ```sh
-git clone https://github.com/Nokse22/trivia.git
+git clone https://github.com/Nokse22/trivia-quiz.git
 ```
 
 Open the project in GNOME Builder and click "Run Project".
