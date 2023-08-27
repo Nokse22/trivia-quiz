@@ -8,6 +8,7 @@ license: GPL-3.0
 source-code: https://github.com/Nokse22/trivia-quiz
 issues: https://github.com/Nokse22/trivia-quiz/issues
 contact: https://github.com/Nokse22/trivia-quiz
+compression: lzo
 architectures:
   - build-on: amd64
   - build-on: arm64

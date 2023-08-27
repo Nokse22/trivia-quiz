@@ -2,8 +2,6 @@ on:
   push:
     branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
-    types: [ "review_requested", "ready_for_review" ]
   workflow_dispatch:
 name: Snap
 permissions:
@@ -11,12 +9,8 @@ permissions:
   contents: read
 jobs:
   snap:
-    name: "GNOME on Snap"
+    name: "Test if the Snap can be built from the latest commit in the branch"
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch: [x86_64]
-      fail-fast: false
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v3
@@ -29,7 +23,7 @@ jobs:
         with:
           name: trivia-quiz-amd64-snap
           path: ${{ steps.snapcraft-build.outputs.snap }}
-      - name: Upload and release Trivia Quiz Snap
+      - name: Upload and release Trivia Quiz snap with every changes
         uses: snapcore/action-publish@v1
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
