@@ -186,7 +186,7 @@ class TriviaWindow(Adw.ApplicationWindow):
         settings_list.append(difficulty_row)
         settings_list.append(category_row)
         settings_list.append(type_row)
-        settings_list.append(gamemode_row)
+        # settings_list.append(gamemode_row)
 
         start_button = Gtk.Button(label="Start", css_classes=["pill", "suggested-action"],
                 halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER, vexpand=True, margin_bottom=40)
