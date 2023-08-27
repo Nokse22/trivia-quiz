@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Trivia Quiz
-Exec=triviaquiz
-Icon=io.github.nokse22.triviaquiz
+Exec=trivia-quiz
+Icon=io.github.nokse22.trivia-quiz
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;System;CPU;Distro;Motherboard;RAM;Memory;Info;

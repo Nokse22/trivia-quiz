@@ -30,7 +30,7 @@ class TriviaApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='io.github.nokse22.triviaquiz',
+        super().__init__(application_id='io.github.nokse22.trivia-quiz',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
@@ -51,7 +51,7 @@ class TriviaApplication(Adw.Application):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name='Trivia Quiz',
-                                application_icon='io.github.nokse22.triviaquiz',
+                                application_icon='io.github.nokse22.trivia-quiz',
                                 developer_name='Nokse',
                                 version='0.1.0',
                                 website='https://github.com/Nokse22/trivia',

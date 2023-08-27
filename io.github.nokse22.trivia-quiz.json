@@ -1,5 +1,5 @@
 {
-    "app-id" : "io.github.nokse22.triviaquiz",
+    "app-id" : "io.github.nokse22.trivia-quiz",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "44",
     "sdk" : "org.gnome.Sdk",

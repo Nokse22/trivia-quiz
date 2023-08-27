@@ -2,7 +2,7 @@
 <component type="desktop">
   <name>Trivia</name>
   <developer_name>Nokse</developer_name>
-	<id>io.github.nokse22.triviaquiz.desktop</id>
+	<id>io.github.nokse22.trivia-quiz.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
   <summary>Respond to endless questions</summary>
@@ -12,7 +12,7 @@ It uses Open Trivia database.
 	  </p>
 	</description>
   <content_rating type="oars-1.0"></content_rating>
-  <launchable type="desktop-id">io.github.nokse22.triviaquiz.desktop</launchable>
+  <launchable type="desktop-id">io.github.nokse22.trivia-quiz.desktop</launchable>
 
   <url type="homepage">https://github.com/Nokse22/trivia-quiz</url>
   <url type="bugtracker">https://github.com/Nokse22/trivia-quiz/issues</url>

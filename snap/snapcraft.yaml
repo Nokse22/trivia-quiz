@@ -18,7 +18,7 @@ parts:
     plugin: meson
     source: https://github.com/Nokse22/trivia-quiz.git
     source-depth: 1
-    parse-info: [ usr/share/metainfo/io.github.nokse22.triviaquiz.metainfo.xml ]
+    parse-info: [ usr/share/metainfo/io.github.nokse22.trivia-quiz.metainfo.xml ]
     build-packages:
       - blueprint-compiler
     meson-parameters:
@@ -34,13 +34,13 @@ slots:
   trivia-quiz:
     interface: dbus
     bus: session
-    name: io.github.nokse22.triviaquiz
+    name: io.github.nokse22.trivia-quiz
 
 apps:
   trivia-quiz:
     command: usr/bin/trivia-quiz
     extensions: [ gnome ]
-    common-id: io.github.nokse22.triviaquiz
-    desktop: usr/share/applications/io.github.nokse22.triviaquiz.desktop
+    common-id: io.github.nokse22.trivia-quiz
+    desktop: usr/share/applications/io.github.nokse22.trivia-quiz.desktop
     plugs:
       - network

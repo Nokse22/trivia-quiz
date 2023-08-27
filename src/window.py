@@ -32,18 +32,18 @@ import threading
 class ListString(GObject.Object):
     __gtype_name__ = 'ListString'
 
-    def __init__(self, name, api_id):
+    def __init__(self, name, identification):
         super().__init__()
         self._name = name
-        self._api_id = api_id
+        self._identification = identification
 
     @GObject.Property(type=str)
     def name(self):
         return self._name
 
     @GObject.Property(type=str)
-    def api_id(self):
-        return self._api_id
+    def identification(self):
+        return self._identification
 
 class Question:
     def __init__(self, question_text, category, difficulty, question_type, correct_answer, incorrect_answers):
@@ -86,7 +86,7 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.set_title("")
         self.set_default_size(600, 800)
-        self.set_size_request(400, 700)
+        self.set_size_request(400, 650)
         self.first_box.append(self.headerbar)
         self.clamp = Adw.Clamp(margin_start=20, margin_end=20, tightening_threshold=600, maximum_size=800)
         self.handle = Gtk.WindowHandle(margin_bottom=10, vexpand=True)
@@ -100,8 +100,12 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.selected_difficulty = ""
         self.selected_category = ""
         self.selected_type = ""
+        self.selected_mode = ""
         self.amount = 20
 
+        self.set_content(self.first_box)
+
+        self.start_page = self.get_start_page()
         self.set_start_page()
 
         self.questions = []
@@ -125,7 +129,7 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.no_connectio_page.append(self.retry_button)
 
         self.clamp.set_child(self.no_connectio_page)
-        self.set_content(self.first_box)
+        # self.set_content(self.first_box)
 
     def on_retry_button_clicked(self, btn):
         code = self.set_start_page()
@@ -139,35 +143,58 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.back_button.set_sensitive(False)
 
     def set_start_page(self):
+        self.clamp.set_child(self.start_page)
+
+    def get_start_page(self):
         new_categories = self.get_categories()
         if new_categories == 0:
             self.set_no_connection_page()
             return 0
         self.categories += new_categories
 
-        self.start_page = Gtk.Box(orientation=1, vexpand=True)
+        start_page = Gtk.Box(orientation=1, vexpand=True)
 
-        self.start_page.append(Gtk.Label(label="Trivia Quiz", css_classes=["large-title"], valign=Gtk.Align.CENTER, vexpand=True))
+        start_page.append(Gtk.Label(label="Trivia Quiz", css_classes=["large-title"], valign=Gtk.Align.CENTER, vexpand=True))
 
-        self.difficulty_row = self.new_combo_row_from_strings("Difficulty", [["Any difficulty", None], ["Easy", "easy"], ["Medium", "medium"], ["Hard", "hard"]])
-        self.category_row = self.new_combo_row_from_strings("Category", self.categories)
-        self.type_row = self.new_combo_row_from_strings("Type", [["Any type", None], ["Multiple Choice", "multiple"], ["True or False", "boolean"]])
+        difficuties = [["Any difficulty", None], ["Easy", "easy"], ["Medium", "medium"], ["Hard", "hard"]]
+        difficulty_row = self.new_combo_row_from_strings("Difficulty", difficuties)
+        # for index, difficulty in enumerate(difficuties):
+        #     if self.selected_difficulty == difficulty[1]:
+        #         difficulty_row.set_selected(index)
 
-        self.settings_list = Gtk.ListBox(selection_mode=0, css_classes=["navigation-sidebar"], valign=Gtk.Align.CENTER, vexpand=True)
+        category_row = self.new_combo_row_from_strings("Category", self.categories)
+        # for index, category in enumerate(self.categories):
+        #     if self.selected_category == category[1]:
+        #         category_row.set_selected(index)
 
-        self.start_page.append(self.settings_list)
+        types = [["Any type", None], ["Multiple Choice", "multiple"], ["True or False", "boolean"]]
+        type_row = self.new_combo_row_from_strings("Type", types)
+        # for index, q_type in enumerate(types):
+        #     if self.selected_difficulty == q_type[1]:
+        #         type_row.set_selected(index)
 
-        self.settings_list.append(self.difficulty_row)
-        self.settings_list.append(self.category_row)
-        self.settings_list.append(self.type_row)
+        modes = [["Endless", "ENDLESS"], ["Time", "TIME"], ["No error", "NO-ERROR"]]
+        gamemode_row = self.new_combo_row_from_strings("Game mode", modes)
+        # for index, mode in enumerate(modes):
+        #     if self.selected_mode == mode[1]:
+        #         gamemode_row.set_selected(index)
 
-        self.start_button = Gtk.Button(label="Start", css_classes=["pill", "suggested-action"],
+        settings_list = Gtk.ListBox(selection_mode=0, css_classes=["navigation-sidebar"], valign=Gtk.Align.CENTER, vexpand=True)
+
+        start_page.append(settings_list)
+
+        settings_list.append(difficulty_row)
+        settings_list.append(category_row)
+        settings_list.append(type_row)
+        settings_list.append(gamemode_row)
+
+        start_button = Gtk.Button(label="Start", css_classes=["pill", "suggested-action"],
                 halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER, vexpand=True, margin_bottom=40)
-        self.start_button.connect("clicked", self.on_start_button_clicked)
-        self.start_page.append(self.start_button)
+        start_button.connect("clicked", self.on_start_button_clicked, difficulty_row, category_row, type_row, gamemode_row)
+        start_page.append(start_button)
 
-        self.clamp.set_child(self.start_page)
-        self.set_content(self.first_box)
+        return start_page
+        # self.set_content(self.first_box)
 
     def get_open_trivia_token(self):
         token_url = "https://opentdb.com/api_token.php?command=request"
@@ -255,11 +282,11 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         if btn == correct_button:
             btn.add_css_class("success")
-            GLib.timeout_add(1500, self.next_question_page)
+            GLib.timeout_add(800, self.next_question_page)
         else:
             btn.add_css_class("error")
             correct_button.add_css_class("success")
-            GLib.timeout_add(1500, self.next_question_page)
+            GLib.timeout_add(800, self.next_question_page)
 
     def next_question_page(self):
         self.has_responded = False
@@ -278,11 +305,12 @@ class TriviaWindow(Adw.ApplicationWindow):
         question_page = self.new_question_page()
         self.clamp.set_child(question_page)
 
-    def on_start_button_clicked(self, btn):
+    def on_start_button_clicked(self, btn, difficulty_row, category_row, type_row, gamemode_row):
         self.back_button.set_sensitive(True)
-        self.selected_difficulty = self.difficulty_row.get_selected_item().api_id
-        self.selected_category = self.category_row.get_selected_item().api_id
-        self.selected_type = self.type_row.get_selected_item().api_id
+        self.selected_difficulty = difficulty_row.get_selected_item().identification
+        self.selected_category = category_row.get_selected_item().identification
+        self.selected_type = type_row.get_selected_item().identification
+        self.selected_mode = type_row.get_selected_item().identification
 
         thread = threading.Thread(target=self.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
         thread.start()

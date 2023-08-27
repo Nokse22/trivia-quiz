@@ -1,4 +1,4 @@
-application_id = 'io.github.nokse22.triviaquiz'
+application_id = 'io.github.nokse22.trivia-quiz'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(
