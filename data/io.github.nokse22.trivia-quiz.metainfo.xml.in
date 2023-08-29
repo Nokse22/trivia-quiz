@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <name>Trivia</name>
+  <name>Trivia Quiz</name>
   <developer_name>Nokse</developer_name>
 	<id>io.github.nokse22.trivia-quiz.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
