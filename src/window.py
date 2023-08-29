@@ -120,7 +120,7 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.no_connectio_page.append(Gtk.Label(label="Trivia Quiz", css_classes=["large-title"], valign=Gtk.Align.CENTER, vexpand=True))
 
-        status_page = Adw.StatusPage(title="No Connection", description="It seems there is no internet connection",
+        status_page = Adw.StatusPage(title="No Connection", description="There is no internet connection or the Open Trivia database is not responding",
                 icon_name="network-wireless-offline-symbolic", vexpand=True)
         self.no_connectio_page.append(status_page)
         self.retry_button = Gtk.Button(label="Retry", css_classes=["pill", "suggested-action"],
