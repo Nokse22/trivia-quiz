@@ -19,27 +19,27 @@ It uses Open Trivia database.
 
   <releases>
     <release version="0.1.4" date="2023-09-04">
-		  <description>
+		  <description  translatable="no">
 			  <p>Fixed bug</p>
 		  </description>
 	  </release>
     <release version="0.1.3" date="2023-08-22">
-		  <description>
+		  <description  translatable="no">
 			  <p>changed app id</p>
 		  </description>
 	  </release>
     <release version="0.1.2" date="2023-08-22">
-		  <description>
+		  <description  translatable="no">
 			  <p>Fixed bugs</p>
 		  </description>
 	  </release>
     <release version="0.1.1" date="2023-08-22">
-		  <description>
+		  <description  translatable="no">
 			  <p>Rename the app to trivia quiz</p>
 		  </description>
 	  </release>
     <release version="0.1.0" date="2023-08-22">
-		  <description>
+		  <description  translatable="no">
 			  <p>First release!</p>
 		  </description>
 	  </release>
