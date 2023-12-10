@@ -1,5 +1,4 @@
 data/io.github.nokse22.trivia-quiz.desktop.in
-data/io.github.nokse22.trivia-quiz.metainfo.xml.in
 data/io.github.nokse22.trivia-quiz.gschema.xml
-src/main.py
-src/window.py
+src/window.ui
+src/gtk/help-overlay.ui
