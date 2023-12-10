@@ -305,6 +305,10 @@ suggested-action</property>
   <menu id="primary_menu">
     <section>
       <item>
+        <attribute name="action">app.contribute-to-otdb</attribute>
+        <attribute name="label">Contribute to Open Trivia DB</attribute>
+      </item>
+      <item>
         <attribute name="action">win.show-help-overlay</attribute>
         <attribute name="label">Keyboard Shortcuts</attribute>
       </item>

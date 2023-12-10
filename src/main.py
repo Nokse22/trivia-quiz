@@ -20,6 +20,8 @@
 import sys
 import gi
 
+import webbrowser
+
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
@@ -35,6 +37,7 @@ class TriviaApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
+        self.create_action('contribute-to-otdb', self.on_contribute_to_otdb_action)
 
     def do_activate(self):
         """Called when the application is activated.
@@ -64,6 +67,9 @@ class TriviaApplication(Adw.Application):
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
         print('app.preferences action activated')
+
+    def on_contribute_to_otdb_action(self, *args):
+        webbrowser.open("https://opentdb.com/")
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
