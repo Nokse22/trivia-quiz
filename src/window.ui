@@ -62,7 +62,7 @@
                           <object class="GtkLabel">
                             <property name="css-classes">large-title</property>
                             <property name="hexpand">True</property>
-                            <property name="label">Trivia Quiz</property>
+                            <property name="label" translatable="no">Trivia Quiz</property>
                             <property name="vexpand">True</property>
                           </object>
                         </child>
@@ -114,7 +114,6 @@ True or false</property>
                             <property name="css-classes">pill
 suggested-action</property>
                             <property name="halign">center</property>
-                            <property name="label">Start</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <signal name="clicked" handler="on_start_button_clicked"/>
@@ -125,7 +124,7 @@ suggested-action</property>
                                     <property name="name">label</property>
                                     <property name="child">
                                       <object class="GtkLabel">
-                                        <property name="label">Start</property>
+                                        <property name="label" translatable="yes">Start</property>
                                         <property name="visible">true</property>
                                       </object>
                                     </property>
@@ -191,48 +190,64 @@ suggested-action</property>
                         <child>
                           <object class="GtkStack" id="answers_stack">
                             <child>
-                              <object class="GtkBox" id="true_false_answers">
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">12</property>
-                                <child>
-                                  <object class="GtkButton" id="true_button">
-                                    <property name="label">True</property>
-                                    <property name="vexpand">True</property>
+                              <object class="GtkStackPage">
+                                <property name="name">true_false_answers</property>
+                                <property name="child">
+                                  <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkButton" id="true_button">
+                                        <property name="label" translatable="no">True</property>
+                                        <property name="vexpand">True</property>
+                                        <signal name="clicked" handler="on_answer_button_clicked"/>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="false_button">
+                                        <property name="label" translatable="no">False</property>
+                                        <property name="vexpand">True</property>
+                                        <signal name="clicked" handler="on_answer_button_clicked"/>
+                                      </object>
+                                    </child>
                                   </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="false_button">
-                                    <property name="label">False</property>
-                                    <property name="vexpand">True</property>
-                                  </object>
-                                </child>
+                                </property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkBox" id="multiple_choice_answers">
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">6</property>
-                                <property name="vexpand">True</property>
-                                <child>
-                                  <object class="GtkButton" id="answer_1">
+                              <object class="GtkStackPage">
+                                <property name="name">multiple_choice_answers</property>
+                                <property name="child">
+                                  <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">6</property>
                                     <property name="vexpand">True</property>
+                                    <child>
+                                      <object class="GtkButton" id="answer_1">
+                                        <property name="vexpand">True</property>
+                                        <signal name="clicked" handler="on_answer_button_clicked"/>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="answer_2">
+                                        <property name="vexpand">True</property>
+                                        <signal name="clicked" handler="on_answer_button_clicked"/>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="answer_3">
+                                        <property name="vexpand">True</property>
+                                        <signal name="clicked" handler="on_answer_button_clicked"/>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="answer_4">
+                                        <property name="vexpand">True</property>
+                                        <signal name="clicked" handler="on_answer_button_clicked"/>
+                                      </object>
+                                    </child>
                                   </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="answer_2">
-                                    <property name="vexpand">True</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="answer_3">
-                                    <property name="vexpand">True</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="answer_4">
-                                    <property name="vexpand">True</property>
-                                  </object>
-                                </child>
+                                </property>
                               </object>
                             </child>
                           </object>
@@ -270,7 +285,7 @@ suggested-action</property>
 suggested-action</property>
                             <property name="halign">center</property>
                             <property name="hexpand">True</property>
-                            <property name="label">Retry</property>
+                            <property name="label" translatable="yes">Retry</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                           </object>
