@@ -101,7 +101,6 @@ class TriviaWindow(Adw.ApplicationWindow):
     def on_home_button_clicked(self, btn):
         self.open_trivia_db.questions = []
         self.stack.set_visible_child_name("home_page")
-        self.home_button.set_sensitive(False)
 
     def set_start_page(self):
         # self.clamp.set_child(self.start_page)
@@ -178,7 +177,6 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("on_start_button_clicked")
     def on_start_button_clicked(self, btn):
-        self.home_button.set_sensitive(True)
         self.selected_difficulty = self.get_identification(self.difficulty_row.get_selected_item(), self.difficulties)
         self.selected_category = self.get_identification(self.category_row.get_selected_item(), self.categories)
         self.selected_type = self.get_identification(self.type_row.get_selected_item(), self.types)
