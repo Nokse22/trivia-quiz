@@ -56,7 +56,7 @@ class TriviaApplication(Adw.Application):
                                 application_name='Trivia Quiz',
                                 application_icon='io.github.nokse22.trivia-quiz',
                                 developer_name='Nokse',
-                                version='0.1.4',
+                                version='0.1.5',
                                 website='https://github.com/Nokse22/trivia',
                                 issue_url='https://github.com/Nokse22/trivia/issues',
                                 developers=['Nokse'],
