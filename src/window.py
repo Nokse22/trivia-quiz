@@ -64,9 +64,17 @@ class TriviaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.categories = [["Any category", None]]
         self.difficulties = [["Any difficulty", None], ["Easy", "easy"], ["Medium", "medium"], ["Hard", "hard"]]
+
         self.types = [["Any type", None], ["Multiple Choice", "multiple"], ["True or False", "boolean"]]
+
+        self.categories = [['Any category', None], ['General Knowledge', 9], ['Entertainment: Books', 10],
+                ['Entertainment: Film', 11], ['Entertainment: Music', 12], ['Entertainment: Musicals & Theatres', 13],
+                ['Entertainment: Television', 14], ['Entertainment: Video Games', 15], ['Entertainment: Board Games', 16],
+                ['Science & Nature', 17], ['Science: Computers', 18], ['Science: Mathematics', 19], ['Mythology', 20],
+                ['Sports', 21], ['Geography', 22], ['History', 23], ['Politics', 24], ['Art', 25], ['Celebrities', 26], ['Animals', 27],
+                ['Vehicles', 28], ['Entertainment: Comics', 29], ['Science: Gadgets', 30],
+                ['Entertainment: Japanese Anime & Manga', 31], ['Entertainment: Cartoon & Animations', 32]]
 
         self.multiple_buttons = [self.answer_1, self.answer_2, self.answer_3, self.answer_4]
         self.true_false_buttons = [self.true_button, self.false_button]
@@ -81,30 +89,15 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.open_trivia_db = OpenTriviaDB()
         # self.open_trivia_db.connect("question-finished", self.on_question_finished)
-        # self.open_trivia_db.connect("error", self.on_backend_error)
-        # self.open_trivia_db.connect("questions-retrieved", self.on_backend_error)
+        self.open_trivia_db.connect("error", self.on_backend_error)
+        self.open_trivia_db.connect("questions-retrieved", self.on_got_questions)
         # self.open_trivia_db.connect("categories-retrieved", self.append_categories)
 
         self.has_responded = False
 
-        self.categories.append(self.open_trivia_db.get_categories())
-
-    # def append_categories(self):
-
-    def on_retry_button_clicked(self, btn):
-        self.stack.set_visible_child_name("question_page")
-        if code == 0:
-            toast = Adw.Toast(title="Still No Connection")
-            # self.toast_overlay.add_toast(toast)
-
-    @Gtk.Template.Callback("on_home_button_clicked")
-    def on_home_button_clicked(self, btn):
-        self.open_trivia_db.questions = []
-        self.stack.set_visible_child_name("home_page")
-
-    def set_start_page(self):
-        # self.clamp.set_child(self.start_page)
-        pass
+    def on_backend_error(self):
+        if self.open_trivia_db.question:
+            pass
 
     def show_question(self):
         for button in self.multiple_buttons:
@@ -129,7 +122,7 @@ class TriviaWindow(Adw.ApplicationWindow):
             self.answers_stack.set_visible_child_name("multiple_choice_answers")
 
             for index, answer in enumerate(possible_answers):
-                self.multiple_buttons[index].set_label(answer)
+                self.multiple_buttons[index].get_child().set_label(answer)
                 if answer == question.correct_answer:
                     self.correct_button = self.multiple_buttons[index]
 
@@ -140,6 +133,52 @@ class TriviaWindow(Adw.ApplicationWindow):
                 self.true_false_buttons[index].set_label(answer)
                 if answer == question.correct_answer:
                     self.correct_button = self.true_false_buttons[index]
+
+    def get_identification(self, interface_name, lookup_array):
+        for couple in lookup_array:
+            if couple[0] == interface_name:
+                return couple[1]
+        return None
+
+    def first_question(self):
+        self.stack.set_visible_child_name("question_page")
+        self.show_question()
+
+    def load_next_question(self):
+        self.has_responded = False
+        self.open_trivia_db.questions.pop(0)
+        print(len(self.open_trivia_db.questions))
+        if len(self.open_trivia_db.questions) == 0:
+            self.open_trivia_db.get_new_trivia_questions(10, self.selected_category, self.selected_difficulty, self.selected_type)
+        elif len(self.open_trivia_db.questions) < 2:
+            th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(10, self.selected_category, self.selected_difficulty, self.selected_type, self.on_got_questions))
+            th.deamon = True
+            th.start()
+
+        self.show_question()
+
+    def on_got_questions(self, *args):
+        self.start_button_stack.set_visible_child_name("label")
+        self.first_question()
+
+    @Gtk.Template.Callback("on_start_button_clicked")
+    def on_start_button_clicked(self, btn):
+        self.selected_difficulty = self.get_identification(self.difficulty_row.get_selected_item(), self.difficulties)
+        self.selected_category = self.get_identification(self.category_row.get_selected_item(), self.categories)
+        self.selected_type = self.get_identification(self.type_row.get_selected_item(), self.types)
+
+        self.start_button_stack.set_visible_child_name("spinner")
+
+        # try:
+        th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(10, self.selected_category, self.selected_difficulty, self.selected_type, self.on_got_questions))
+        th.deamon = True
+        th.start()
+            # self.open_trivia_db.get_new_trivia_questions(10, self.selected_category, self.selected_difficulty, self.selected_type, on_got_start_questions)
+        # except:
+        #     print("error")
+        #     self.stack.set_visible_child_name("error_page")
+        # else:
+        #     pass
 
     @Gtk.Template.Callback("on_answer_button_clicked")
     def on_answer_button_clicked(self, btn):
@@ -152,7 +191,7 @@ class TriviaWindow(Adw.ApplicationWindow):
             question = self.open_trivia_db.questions[0]
         except:
             return
-        answer = btn.get_label()
+        answer = btn.get_child().get_label()
         print(f"Responded: {answer}")
 
         if answer == question.correct_answer:
@@ -163,38 +202,18 @@ class TriviaWindow(Adw.ApplicationWindow):
             self.correct_button.add_css_class("success")
             GLib.timeout_add(800, self.load_next_question)
 
-    def load_next_question(self):
-        self.has_responded = False
-        self.open_trivia_db.questions.pop(0)
-        print(len(self.open_trivia_db.questions))
-        if len(self.open_trivia_db.questions) == 0:
+    @Gtk.Template.Callback("on_retry_button_clicked")
+    def on_retry_button_clicked(self, btn):
+        try:
             self.open_trivia_db.get_new_trivia_questions(10, self.selected_category, self.selected_difficulty, self.selected_type)
-        elif len(self.open_trivia_db.questions) < 2:
-            thread = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(10, self.selected_category, self.selected_difficulty, self.selected_type))
-            thread.start()
+        except:
+            print("error")
+            self.stack.set_visible_child_name("error_page")
+        else:
+            self.start_button_stack.set_visible_child_name("label")
+            self.first_question()
 
-        self.show_question()
-
-    @Gtk.Template.Callback("on_start_button_clicked")
-    def on_start_button_clicked(self, btn):
-        self.selected_difficulty = self.get_identification(self.difficulty_row.get_selected_item(), self.difficulties)
-        self.selected_category = self.get_identification(self.category_row.get_selected_item(), self.categories)
-        self.selected_type = self.get_identification(self.type_row.get_selected_item(), self.types)
-
-        self.start_button_stack.set_visible_child_name("spinner")
-
-        self.open_trivia_db.get_new_trivia_questions(10, self.selected_category, self.selected_difficulty, self.selected_type)
-
-        self.start_button_stack.set_visible_child_name("label")
-
-        self.first_question()
-
-    def get_identification(self, interface_name, lookup_array):
-        for couple in lookup_array:
-            if couple[0] == interface_name:
-                return couple[1]
-        return None
-
-    def first_question(self):
-        self.stack.set_visible_child_name("question_page")
-        self.show_question()
+    @Gtk.Template.Callback("on_home_button_clicked")
+    def on_home_button_clicked(self, btn):
+        self.open_trivia_db.questions = []
+        self.stack.set_visible_child_name("home_page")

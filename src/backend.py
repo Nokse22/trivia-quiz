@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import GObject
-from gi.repository import Gst, GLib
+from gi.repository import GLib
 
 from .question import Question
 
@@ -67,7 +67,15 @@ class OpenTriviaDB(GObject.GObject):
             print(e)
             return 0
 
-    def get_new_trivia_questions(self, amount=10, category=None, difficulty=None, question_type=None, token=None):
+    # def get_new_trivia_questions(self, amount=10, category=None, difficulty=None, question_type=None, token=None, thread=False):
+    #     if thread:
+    #         th = threading.Thread(target=self._get_new_trivia_questions, args=(amount, category, difficulty, question_type, token))
+    #         th.deamon = True
+    #         th.start()
+    #     else:
+    #         self._get_new_trivia_questions(self, amount, category, difficulty, question_type, token)
+
+    def get_new_trivia_questions(self, amount=10, category=None, difficulty=None, question_type=None, token=None, callback=None):
         print(f"amount: {amount}")
         base_url = "https://opentdb.com/api.php"
 
@@ -88,7 +96,9 @@ class OpenTriviaDB(GObject.GObject):
             response = requests.get(base_url, params=params)
         except Exception as e:
             print(e)
-            return 0
+            raise Exception("No internet connection")
+            self.emit("error")
+            return
 
         data = response.json()
 
@@ -128,7 +138,12 @@ class OpenTriviaDB(GObject.GObject):
         except json.JSONDecodeError as e:
             print("Error decoding JSON:", e)
 
+        # self.emit("questions-retrieved")
+        if callback:
+            callback()
+
     def get_categories(self):
+        print("get categories")
         base_url = "https://opentdb.com/api_category.php"
 
         try:
