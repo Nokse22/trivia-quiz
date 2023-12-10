@@ -27,7 +27,6 @@
               <object class="GtkButton" id="home_button">
                 <property name="css-classes">flat</property>
                 <property name="icon-name">go-home-symbolic</property>
-                <!-- <property name="sensitive">False</property> -->
                 <property name="sensitive" bind-source="home_page" bind-property="visible" bind-flags="invert-boolean">False</property>
                 <signal name="clicked" handler="on_home_button_clicked"/>
               </object>
@@ -91,7 +90,31 @@ Hard</property>
                               <object class="AdwComboRow" id="category_row">
                                 <property name="model">
                                   <object class="GtkStringList" id="categories_string_list">
-                                    <property name="strings">Any category</property>
+                                    <property name="strings">Any category
+General Knowledge
+Entertainment: Books
+Entertainment: Film
+Entertainment: Music
+Entertainment: Musicals &amp; Theatres
+Entertainment: Television
+Entertainment: Video Games
+Entertainment: Board Games
+Science &amp; Nature
+Science: Computers
+Science: Mathematics
+Mythology
+Sports
+Geography
+History
+Politics
+Art
+Celebrities
+Animals
+Vehicles
+Entertainment: Comics
+Science: Gadgets
+Entertainment: Japanese Anime &amp; Manga
+Entertainment: Cartoon &amp; Animations</property>
                                   </object>
                                 </property>
                                 <property name="title">Category</property>
@@ -186,6 +209,7 @@ suggested-action</property>
                             <property name="css-classes">large-title</property>
                             <property name="vexpand">True</property>
                             <property name="wrap">True</property>
+                            <property name="justify">center</property>
                           </object>
                         </child>
                         <child>
@@ -227,24 +251,48 @@ suggested-action</property>
                                       <object class="GtkButton" id="answer_1">
                                         <property name="vexpand">True</property>
                                         <signal name="clicked" handler="on_answer_button_clicked"/>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="wrap">True</property>
+                                            <property name="justify">center</property>
+                                          </object>
+                                        </child>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="answer_2">
                                         <property name="vexpand">True</property>
                                         <signal name="clicked" handler="on_answer_button_clicked"/>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="wrap">True</property>
+                                            <property name="justify">center</property>
+                                          </object>
+                                        </child>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="answer_3">
                                         <property name="vexpand">True</property>
                                         <signal name="clicked" handler="on_answer_button_clicked"/>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="wrap">True</property>
+                                            <property name="justify">center</property>
+                                          </object>
+                                        </child>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="answer_4">
                                         <property name="vexpand">True</property>
                                         <signal name="clicked" handler="on_answer_button_clicked"/>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="wrap">True</property>
+                                            <property name="justify">center</property>
+                                          </object>
+                                        </child>
                                       </object>
                                     </child>
                                   </object>
@@ -289,6 +337,7 @@ suggested-action</property>
                             <property name="label" translatable="yes">Retry</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
+                            <signal name="clicked" handler="on_retry_button_clicked"/>
                           </object>
                         </child>
                       </object>
@@ -314,6 +363,7 @@ suggested-action</property>
         <attribute name="label">Keyboard Shortcuts</attribute>
       </item>
       <item>
+        <!-- Translators: do not translate the application name -->
         <attribute name="action">app.about</attribute>
         <attribute name="label">About Trivia Quiz</attribute>
       </item>
