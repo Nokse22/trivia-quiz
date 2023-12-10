@@ -152,7 +152,6 @@ class TriviaWindow(Adw.ApplicationWindow):
             self.open_trivia_db.get_new_trivia_questions(10, self.selected_category, self.selected_difficulty, self.selected_type)
         elif len(self.open_trivia_db.questions) < 2:
             th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(10, self.selected_category, self.selected_difficulty, self.selected_type, self.on_got_questions))
-            th.deamon = True
             th.start()
 
         self.show_question()
@@ -171,7 +170,6 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         # try:
         th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(10, self.selected_category, self.selected_difficulty, self.selected_type, self.on_got_questions))
-        th.deamon = True
         th.start()
             # self.open_trivia_db.get_new_trivia_questions(10, self.selected_category, self.selected_difficulty, self.selected_type, on_got_start_questions)
         # except:

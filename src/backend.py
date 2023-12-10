@@ -70,7 +70,6 @@ class OpenTriviaDB(GObject.GObject):
     # def get_new_trivia_questions(self, amount=10, category=None, difficulty=None, question_type=None, token=None, thread=False):
     #     if thread:
     #         th = threading.Thread(target=self._get_new_trivia_questions, args=(amount, category, difficulty, question_type, token))
-    #         th.deamon = True
     #         th.start()
     #     else:
     #         self._get_new_trivia_questions(self, amount, category, difficulty, question_type, token)
@@ -106,7 +105,7 @@ class OpenTriviaDB(GObject.GObject):
             results = data.get("results", [])
             response_code = data.get("response_code")
 
-            print(f"responce: {response_code}")
+            print(f"response: {response_code}")
 
             if response_code == 1:
                 if self.amount == 5:

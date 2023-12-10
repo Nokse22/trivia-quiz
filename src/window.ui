@@ -322,7 +322,7 @@ suggested-action</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="AdwStatusPage">
-                            <property name="description">There was an error retriving some data, try reloading or later.</property>
+                            <property name="description">There was an error retrieving some data, try reloading or later.</property>
                             <property name="hexpand">True</property>
                             <property name="icon-name">network-wireless-offline-symbolic</property>
                             <property name="title">No Connection</property>
