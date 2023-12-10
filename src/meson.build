@@ -30,6 +30,8 @@ trivia_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'backend.py',
+  'question.py',
 ]
 
 install_data(trivia_sources, install_dir: moduledir)
