@@ -46,6 +46,7 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     start_button = Gtk.Template.Child()
     start_button_stack = Gtk.Template.Child()
+    retry_button_stack = Gtk.Template.Child()
 
     category_label = Gtk.Template.Child()
     difficulty_label = Gtk.Template.Child()
@@ -89,15 +90,19 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.open_trivia_db = OpenTriviaDB()
         # self.open_trivia_db.connect("question-finished", self.on_question_finished)
-        self.open_trivia_db.connect("error", self.on_backend_error)
+        self.open_trivia_db.connect("connection-error", self.on_backend_error)
         self.open_trivia_db.connect("questions-retrieved", self.on_got_questions)
         # self.open_trivia_db.connect("categories-retrieved", self.append_categories)
 
         self.has_responded = False
 
-    def on_backend_error(self):
-        if self.open_trivia_db.question:
-            pass
+    def on_backend_error(self, *args):
+        print("error2")
+        self.retry_button_stack.set_visible_child_name("retry_label")
+        if self.open_trivia_db.questions == []:
+            self.stack.set_visible_child_name("error_page")
+            self.start_button_stack.set_visible_child_name("label")
+            self.home_button.set_sensitive(True)
 
     def show_question(self):
         for button in self.multiple_buttons:
@@ -142,6 +147,8 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     def first_question(self):
         self.stack.set_visible_child_name("question_page")
+        self.start_button_stack.set_visible_child_name("label")
+        self.home_button.set_sensitive(True)
         self.show_question()
 
     def load_next_question(self):
@@ -158,6 +165,7 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     def on_got_questions(self, *args):
         self.start_button_stack.set_visible_child_name("label")
+        self.retry_button_stack.set_visible_child_name("retry_label")
         self.first_question()
 
     @Gtk.Template.Callback("on_start_button_clicked")
@@ -168,15 +176,8 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.start_button_stack.set_visible_child_name("spinner")
 
-        # try:
-        th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(10, self.selected_category, self.selected_difficulty, self.selected_type, self.on_got_questions))
+        th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(10, self.selected_category, self.selected_difficulty, self.selected_type))
         th.start()
-            # self.open_trivia_db.get_new_trivia_questions(10, self.selected_category, self.selected_difficulty, self.selected_type, on_got_start_questions)
-        # except:
-        #     print("error")
-        #     self.stack.set_visible_child_name("error_page")
-        # else:
-        #     pass
 
     @Gtk.Template.Callback("on_answer_button_clicked")
     def on_answer_button_clicked(self, btn):
@@ -202,16 +203,13 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("on_retry_button_clicked")
     def on_retry_button_clicked(self, btn):
-        try:
-            self.open_trivia_db.get_new_trivia_questions(10, self.selected_category, self.selected_difficulty, self.selected_type)
-        except:
-            print("error")
-            self.stack.set_visible_child_name("error_page")
-        else:
-            self.start_button_stack.set_visible_child_name("label")
-            self.first_question()
+        self.retry_button_stack.set_visible_child_name("retry_spinner")
+
+        th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(10, self.selected_category, self.selected_difficulty, self.selected_type))
+        th.start()
 
     @Gtk.Template.Callback("on_home_button_clicked")
     def on_home_button_clicked(self, btn):
         self.open_trivia_db.questions = []
         self.stack.set_visible_child_name("home_page")
+        self.home_button.set_sensitive(False)
