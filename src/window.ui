@@ -334,10 +334,34 @@ suggested-action</property>
 suggested-action</property>
                             <property name="halign">center</property>
                             <property name="hexpand">True</property>
-                            <property name="label" translatable="yes">Retry</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
                             <signal name="clicked" handler="on_retry_button_clicked"/>
+                            <child>
+                              <object class="GtkStack" id="retry_button_stack">
+                                <child>
+                                  <object class="GtkStackPage">
+                                    <property name="name">retry_label</property>
+                                    <property name="child">
+                                      <object class="GtkLabel">
+                                        <property name="label" translatable="yes">Retry</property>
+                                        <property name="visible">true</property>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkStackPage">
+                                    <property name="name">retry_spinner</property>
+                                    <property name="child">
+                                      <object class="GtkSpinner">
+                                        <property name="spinning">true</property>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
