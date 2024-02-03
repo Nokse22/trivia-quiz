@@ -31,6 +31,7 @@ import threading
 class OpenTriviaDB(GObject.GObject):
     __gsignals__ = {
         'connection-error': (GObject.SignalFlags.RUN_FIRST, None, ()),
+        'results-error': (GObject.SignalFlags.RUN_FIRST, None, ()),
         'questions-finished': (GObject.SignalFlags.RUN_FIRST, None, ()),
         'questions-retrieved': (GObject.SignalFlags.RUN_FIRST, None, ()),
         'categories-retrieved': (GObject.SignalFlags.RUN_FIRST, None, ()),
@@ -67,8 +68,7 @@ class OpenTriviaDB(GObject.GObject):
             print("error4")
             return 0
 
-    def get_new_trivia_questions(self, amount=10, category=None, difficulty=None, question_type=None, token=None):
-        print(f"amount: {amount}")
+    def get_new_trivia_questions(self, amount=1, category=None, difficulty=None, question_type=None, token=None):
         base_url = "https://opentdb.com/api.php"
 
         params = {}
@@ -87,10 +87,7 @@ class OpenTriviaDB(GObject.GObject):
         try:
             response = requests.get(base_url, params=params)
         except Exception as e:
-            print("connection-error")
-            # raise Exception("No internet connection")
             self.emit("connection-error")
-            print("emitted")
             return
 
         data = response.json()
@@ -101,18 +98,21 @@ class OpenTriviaDB(GObject.GObject):
 
             print(f"response: {response_code}")
 
-            if response_code == 1:
-                print("The API returned no results")
-                self.emit("connection-error")
+            if response_code == 0:
+                pass
+            elif response_code == 1:
+                self.emit("results-error")
                 return
-            if response_code == 2:
-                print("There was en error retrieving more questions")
-                self.emit("connection-error")
+            elif response_code == 2:
+                self.emit("results-error")
                 return
-            if response_code == 3:
+            elif response_code == 3:
                 self.token = self.get_open_trivia_token()
             elif response_code == 4:
-                self.token = self.reset_open_trivia_token()
+                self.emit("results-error")
+                # self.token = self.reset_open_trivia_token()
+            elif response_code == 5:
+                return
 
             for result in results:
                 question_text = html.unescape(result.get("question"))
@@ -126,7 +126,6 @@ class OpenTriviaDB(GObject.GObject):
 
                 question = Question(question_text, category, difficulty, question_type, correct_answer, incorrect_answers)
                 self.questions.append(question)
-                print("added question")
 
         except json.JSONDecodeError as e:
             print("Error decoding JSON:", e)
@@ -160,3 +159,6 @@ class OpenTriviaDB(GObject.GObject):
             print("Error decoding JSON:", e)
 
         return category_names
+
+    def reset_questions(self):
+        self.questions = []
