@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.16.0 -->
+<!-- Created with Cambalache 0.17.0 -->
 <interface>
   <!-- interface-name trivia quiz.ui -->
   <requires lib="gio" version="2.0"/>
@@ -12,6 +12,7 @@
     <property name="width-request">300</property>
     <child>
       <object class="AdwBreakpoint">
+        <!-- Custom fragments -->
         <condition>max-width: 400px</condition>
         <setter object="question_label" property="css-classes">n</setter>
       </object>
@@ -42,11 +43,8 @@
         <child>
           <object class="GtkStack" id="stack">
             <property name="transition-type">crossfade</property>
-            <!-- <property name="visible-child-name">home_page</property> -->
-
             <child>
               <object class="GtkStackPage" id="home_page">
-                <property name="name">home_page</property>
                 <property name="child">
                   <object class="AdwClamp">
                     <property name="margin-bottom">12</property>
@@ -62,7 +60,7 @@
                           <object class="GtkLabel">
                             <property name="css-classes">large-title</property>
                             <property name="hexpand">True</property>
-                            <property name="label" translatable="no">Trivia Quiz</property>
+                            <property name="label" translatable="yes">Trivia Quiz</property>
                             <property name="vexpand">True</property>
                           </object>
                         </child>
@@ -146,23 +144,23 @@ suggested-action</property>
                               <object class="GtkStack" id="start_button_stack">
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">label</property>
                                     <property name="child">
                                       <object class="GtkLabel">
                                         <property name="label" translatable="yes">Start</property>
                                         <property name="visible">true</property>
                                       </object>
                                     </property>
+                                    <property name="name">label</property>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">spinner</property>
                                     <property name="child">
                                       <object class="GtkSpinner">
                                         <property name="spinning">true</property>
                                       </object>
                                     </property>
+                                    <property name="name">spinner</property>
                                   </object>
                                 </child>
                               </object>
@@ -173,12 +171,11 @@ suggested-action</property>
                     </child>
                   </object>
                 </property>
+                <property name="name">home_page</property>
               </object>
             </child>
-
             <child>
               <object class="GtkStackPage" id="question_page">
-                <property name="name">question_page</property>
                 <property name="child">
                   <object class="AdwClamp">
                     <property name="margin-bottom">12</property>
@@ -190,118 +187,132 @@ suggested-action</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkBox">
-                            <property name="valign">start</property>
-                            <child>
-                              <object class="GtkLabel" id="category_label">
-                                <property name="ellipsize">end</property>
-                                <property name="hexpand">True</property>
-                                <property name="justify">left</property>
-                                <property name="xalign">0</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="difficulty_label">
-                                <property name="ellipsize">end</property>
-                                <property name="hexpand">True</property>
-                                <property name="justify">right</property>
-                                <property name="xalign">1</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="question_label">
-                            <property name="css-classes">large-title</property>
+                            <property name="orientation">vertical</property>
                             <property name="vexpand">True</property>
-                            <property name="wrap">True</property>
-                            <property name="justify">center</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkStack" id="answers_stack">
                             <child>
-                              <object class="GtkStackPage">
-                                <property name="name">true_false_answers</property>
-                                <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="orientation">vertical</property>
-                                    <property name="spacing">12</property>
-                                    <child>
-                                      <object class="GtkButton" id="true_button">
-                                        <property name="label" translatable="no">True</property>
-                                        <property name="vexpand">True</property>
-                                        <signal name="clicked" handler="on_answer_button_clicked"/>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="false_button">
-                                        <property name="label" translatable="no">False</property>
-                                        <property name="vexpand">True</property>
-                                        <signal name="clicked" handler="on_answer_button_clicked"/>
-                                      </object>
-                                    </child>
+                              <object class="GtkBox">
+                                <property name="valign">start</property>
+                                <child>
+                                  <object class="GtkLabel" id="category_label">
+                                    <property name="ellipsize">end</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="justify">left</property>
+                                    <property name="xalign">0</property>
                                   </object>
-                                </property>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="difficulty_label">
+                                    <property name="ellipsize">end</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="justify">right</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkStackPage">
-                                <property name="name">multiple_choice_answers</property>
-                                <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="orientation">vertical</property>
-                                    <property name="spacing">6</property>
-                                    <property name="vexpand">True</property>
-                                    <child>
-                                      <object class="GtkButton" id="answer_1">
-                                        <property name="vexpand">True</property>
-                                        <signal name="clicked" handler="on_answer_button_clicked"/>
+                              <object class="GtkLabel" id="question_label">
+                                <property name="css-classes">large-title</property>
+                                <property name="justify">center</property>
+                                <property name="vexpand">True</property>
+                                <property name="vexpand-set">True</property>
+                                <property name="wrap">True</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="vexpand">True</property>
+                            <child>
+                              <object class="GtkStack" id="answers_stack">
+                                <property name="vexpand">True</property>
+                                <child>
+                                  <object class="GtkStackPage">
+                                    <property name="child">
+                                      <object class="GtkBox">
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">12</property>
                                         <child>
-                                          <object class="GtkLabel">
-                                            <property name="wrap">True</property>
-                                            <property name="justify">center</property>
+                                          <object class="GtkButton" id="true_button">
+                                            <property name="label" translatable="yes">True</property>
+                                            <property name="vexpand">True</property>
+                                            <signal name="clicked" handler="on_answer_button_clicked"/>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="false_button">
+                                            <property name="label" translatable="yes">False</property>
+                                            <property name="vexpand">True</property>
+                                            <signal name="clicked" handler="on_answer_button_clicked"/>
                                           </object>
                                         </child>
                                       </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="answer_2">
-                                        <property name="vexpand">True</property>
-                                        <signal name="clicked" handler="on_answer_button_clicked"/>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="wrap">True</property>
-                                            <property name="justify">center</property>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="answer_3">
-                                        <property name="vexpand">True</property>
-                                        <signal name="clicked" handler="on_answer_button_clicked"/>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="wrap">True</property>
-                                            <property name="justify">center</property>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="answer_4">
-                                        <property name="vexpand">True</property>
-                                        <signal name="clicked" handler="on_answer_button_clicked"/>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="wrap">True</property>
-                                            <property name="justify">center</property>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
+                                    </property>
+                                    <property name="name">true_false_answers</property>
                                   </object>
-                                </property>
+                                </child>
+                                <child>
+                                  <object class="GtkStackPage">
+                                    <property name="child">
+                                      <object class="GtkBox">
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">6</property>
+                                        <property name="vexpand">True</property>
+                                        <child>
+                                          <object class="GtkButton" id="answer_1">
+                                            <property name="vexpand">True</property>
+                                            <signal name="clicked" handler="on_answer_button_clicked"/>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="justify">center</property>
+                                                <property name="wrap">True</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="answer_2">
+                                            <property name="vexpand">True</property>
+                                            <signal name="clicked" handler="on_answer_button_clicked"/>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="justify">center</property>
+                                                <property name="wrap">True</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="answer_3">
+                                            <property name="vexpand">True</property>
+                                            <signal name="clicked" handler="on_answer_button_clicked"/>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="justify">center</property>
+                                                <property name="wrap">True</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="answer_4">
+                                            <property name="vexpand">True</property>
+                                            <signal name="clicked" handler="on_answer_button_clicked"/>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="justify">center</property>
+                                                <property name="wrap">True</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </property>
+                                    <property name="name">multiple_choice_answers</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
@@ -310,12 +321,11 @@ suggested-action</property>
                     </child>
                   </object>
                 </property>
+                <property name="name">question_page</property>
               </object>
             </child>
-
             <child>
-              <object class="GtkStackPage" id="error_page">
-                <property name="name">error_page</property>
+              <object class="GtkStackPage" id="connection_error_page">
                 <property name="child">
                   <object class="AdwClamp">
                     <property name="margin-bottom">12</property>
@@ -327,7 +337,7 @@ suggested-action</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="AdwStatusPage">
-                            <property name="description">There was an error retrieving some data, try reloading or later.</property>
+                            <property name="description">There was an error connecting to the server.</property>
                             <property name="hexpand">True</property>
                             <property name="icon-name">network-wireless-offline-symbolic</property>
                             <property name="title">No Connection</property>
@@ -347,23 +357,23 @@ suggested-action</property>
                               <object class="GtkStack" id="retry_button_stack">
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">label</property>
                                     <property name="child">
                                       <object class="GtkLabel">
                                         <property name="label" translatable="yes">Retry</property>
                                         <property name="visible">true</property>
                                       </object>
                                     </property>
+                                    <property name="name">label</property>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">spinner</property>
                                     <property name="child">
                                       <object class="GtkSpinner">
                                         <property name="spinning">true</property>
                                       </object>
                                     </property>
+                                    <property name="name">spinner</property>
                                   </object>
                                 </child>
                               </object>
@@ -374,12 +384,11 @@ suggested-action</property>
                     </child>
                   </object>
                 </property>
+                <property name="name">connection_error_page</property>
               </object>
             </child>
-
             <child>
               <object class="GtkStackPage" id="results_error_page">
-                <property name="name">results_error_page</property>
                 <property name="child">
                   <object class="AdwClamp">
                     <property name="margin-bottom">12</property>
@@ -391,7 +400,7 @@ suggested-action</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="AdwStatusPage">
-                            <property name="description">There are no more questions for this set of parameters.</property>
+                            <property name="description">There are no more questions for this set of parameters. Reset your token or change parameters.</property>
                             <property name="hexpand">True</property>
                             <property name="icon-name">edit-find-symbolic</property>
                             <property name="title">No More Questions</property>
@@ -411,23 +420,23 @@ suggested-action</property>
                               <object class="GtkStack" id="reset_button_stack">
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">label</property>
                                     <property name="child">
                                       <object class="GtkLabel">
                                         <property name="label" translatable="yes">Reset</property>
                                         <property name="visible">true</property>
                                       </object>
                                     </property>
+                                    <property name="name">label</property>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">spinner</property>
                                     <property name="child">
                                       <object class="GtkSpinner">
                                         <property name="spinning">true</property>
                                       </object>
                                     </property>
+                                    <property name="name">spinner</property>
                                   </object>
                                 </child>
                               </object>
@@ -438,9 +447,9 @@ suggested-action</property>
                     </child>
                   </object>
                 </property>
+                <property name="name">results_error_page</property>
               </object>
             </child>
-
           </object>
         </child>
       </object>
@@ -457,7 +466,6 @@ suggested-action</property>
         <attribute name="label">Keyboard Shortcuts</attribute>
       </item>
       <item>
-        <!-- Translators: do not translate the application name -->
         <attribute name="action">app.about</attribute>
         <attribute name="label">About Trivia Quiz</attribute>
       </item>
