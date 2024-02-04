@@ -16,8 +16,17 @@ It uses Open Trivia database.
 
   <url type="homepage">https://github.com/Nokse22/trivia-quiz</url>
   <url type="bugtracker">https://github.com/Nokse22/trivia-quiz/issues</url>
+  <url type="vcs-browser">https://github.com/Nokse22/trivia-quiz</url>
+  <url type="translate">https://github.com/Nokse22/trivia-quiz/tree/master/po</url>
+  <url type="donation">https://ko-fi.com/nokse22</url>
 
   <releases>
+    <release version="0.2.0" date="2024-02-08">
+		  <description  translatable="no">
+			  <p>Minor UI improvements</p>
+		    <p>Now it won't ask the same question twice anymore</p>
+		  </description>
+	  </release>
     <release version="0.1.4" date="2023-09-04">
 		  <description  translatable="no">
 			  <p>Fixed bug</p>
