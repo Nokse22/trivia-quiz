@@ -337,10 +337,10 @@ suggested-action</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="AdwStatusPage">
-                            <property name="description">There was an error connecting to the server.</property>
+                            <property name="description" translatable="yes">There was an error connecting to the server.</property>
                             <property name="hexpand">True</property>
                             <property name="icon-name">network-wireless-offline-symbolic</property>
-                            <property name="title">No Connection</property>
+                            <property name="title" translatable="yes">No Connection</property>
                             <property name="vexpand">true</property>
                           </object>
                         </child>
@@ -400,10 +400,10 @@ suggested-action</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="AdwStatusPage">
-                            <property name="description">There are no more questions for this set of parameters. Reset your token or change parameters.</property>
+                            <property name="description" translatable="yes">There are no more questions for this set of parameters. Reset your token or change parameters.</property>
                             <property name="hexpand">True</property>
                             <property name="icon-name">edit-find-symbolic</property>
-                            <property name="title">No More Questions</property>
+                            <property name="title" translatable="yes">No More Questions</property>
                             <property name="vexpand">true</property>
                           </object>
                         </child>
