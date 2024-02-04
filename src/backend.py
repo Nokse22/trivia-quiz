@@ -37,6 +37,7 @@ class OpenTriviaDB(GObject.GObject):
         'questions-retrieved': (GObject.SignalFlags.RUN_FIRST, None, ()),
         'categories-retrieved': (GObject.SignalFlags.RUN_FIRST, None, ()),
         'token-reset': (GObject.SignalFlags.RUN_FIRST, None, ()),
+        'rate-limit': (GObject.SignalFlags.RUN_FIRST, None, ()),
     }
 
     def __init__(self, **kwargs):
@@ -44,9 +45,6 @@ class OpenTriviaDB(GObject.GObject):
 
         self.questions = []
         self.token = "123"
-
-        # self.is_empty = False
-        # self.no_connection = False
 
     def get_open_trivia_token(self):
         token_url = "https://opentdb.com/api_token.php?command=request"
@@ -73,13 +71,15 @@ class OpenTriviaDB(GObject.GObject):
 
         self.emit('token-reset')
 
+    def get_new_trivia_questions_with_delay(self, amount=1, category=None, difficulty=None, question_type=None, token=None):
+        time.sleep(5.1)
+        self.get_new_trivia_questions(amount, category, difficulty, question_type, token)
+
     def get_new_trivia_questions(self, amount=1, category=None, difficulty=None, question_type=None, token=None):
         base_url = "https://opentdb.com/api.php"
 
-        print(token)
         if token == None:
             token = self.token
-            print(token)
 
         params = {}
 
@@ -97,7 +97,6 @@ class OpenTriviaDB(GObject.GObject):
             response = requests.get(base_url, params=params)
         except Exception as e:
             self.emit("connection-error")
-            self.no_connection = True
             return
 
         data = response.json()
@@ -124,11 +123,9 @@ class OpenTriviaDB(GObject.GObject):
                 return
             elif response_code == 4:
                 self.emit("results-error")
-                self.is_empty = True
                 return
             elif response_code == 5:
-                time.sleep(5.1)
-                self.get_new_trivia_questions(amount, category, difficulty, question_type)
+                self.emit('rate-limit')
                 return
 
             for result in results:
