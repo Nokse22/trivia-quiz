@@ -195,12 +195,16 @@ suggested-action</property>
                               <object class="GtkLabel" id="category_label">
                                 <property name="ellipsize">end</property>
                                 <property name="hexpand">True</property>
+                                <property name="justify">left</property>
+                                <property name="xalign">0</property>
                               </object>
                             </child>
                             <child>
                               <object class="GtkLabel" id="difficulty_label">
                                 <property name="ellipsize">end</property>
                                 <property name="hexpand">True</property>
+                                <property name="justify">right</property>
+                                <property name="xalign">1</property>
                               </object>
                             </child>
                           </object>
@@ -327,6 +331,7 @@ suggested-action</property>
                             <property name="hexpand">True</property>
                             <property name="icon-name">network-wireless-offline-symbolic</property>
                             <property name="title">No Connection</property>
+                            <property name="vexpand">true</property>
                           </object>
                         </child>
                         <child>
@@ -342,7 +347,7 @@ suggested-action</property>
                               <object class="GtkStack" id="retry_button_stack">
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">retry_label</property>
+                                    <property name="name">label</property>
                                     <property name="child">
                                       <object class="GtkLabel">
                                         <property name="label" translatable="yes">Retry</property>
@@ -353,7 +358,7 @@ suggested-action</property>
                                 </child>
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">retry_spinner</property>
+                                    <property name="name">spinner</property>
                                     <property name="child">
                                       <object class="GtkSpinner">
                                         <property name="spinning">true</property>
@@ -390,6 +395,7 @@ suggested-action</property>
                             <property name="hexpand">True</property>
                             <property name="icon-name">edit-find-symbolic</property>
                             <property name="title">No More Questions</property>
+                            <property name="vexpand">true</property>
                           </object>
                         </child>
                         <child>
@@ -400,12 +406,12 @@ suggested-action</property>
                             <property name="hexpand">True</property>
                             <property name="valign">center</property>
                             <property name="vexpand">True</property>
-                            <!-- <signal name="clicked" handler="on_retry_button_clicked"/> -->
+                            <signal name="clicked" handler="on_reset_button_clicked"/>
                             <child>
                               <object class="GtkStack" id="reset_button_stack">
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">retry_label</property>
+                                    <property name="name">label</property>
                                     <property name="child">
                                       <object class="GtkLabel">
                                         <property name="label" translatable="yes">Reset</property>
@@ -416,7 +422,7 @@ suggested-action</property>
                                 </child>
                                 <child>
                                   <object class="GtkStackPage">
-                                    <property name="name">retry_spinner</property>
+                                    <property name="name">spinner</property>
                                     <property name="child">
                                       <object class="GtkSpinner">
                                         <property name="spinning">true</property>

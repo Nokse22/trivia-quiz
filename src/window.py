@@ -44,9 +44,10 @@ class TriviaWindow(Adw.ApplicationWindow):
     categories_string_list = Gtk.Template.Child()
     stack = Gtk.Template.Child()
 
-    start_button = Gtk.Template.Child()
+    # start_button = Gtk.Template.Child()
     start_button_stack = Gtk.Template.Child()
     retry_button_stack = Gtk.Template.Child()
+    reset_button_stack = Gtk.Template.Child()
 
     category_label = Gtk.Template.Child()
     difficulty_label = Gtk.Template.Child()
@@ -91,22 +92,27 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.open_trivia_db.connect("connection-error", self.on_backend_connection_error)
         self.open_trivia_db.connect("results-error", self.on_backend_results_error)
         self.open_trivia_db.connect("questions-retrieved", self.on_got_questions)
+        self.open_trivia_db.connect("token-reset", self.remove_spinners)
 
         self.has_responded = False
 
     def on_backend_connection_error(self, *args):
-        self.retry_button_stack.set_visible_child_name("retry_label")
+        self.retry_button_stack.set_visible_child_name("label")
         if self.open_trivia_db.questions == []:
             self.stack.set_visible_child_name("error_page")
             self.start_button_stack.set_visible_child_name("label")
             self.home_button.set_sensitive(True)
 
     def on_backend_results_error(self, *args):
-        self.retry_button_stack.set_visible_child_name("retry_label")
-        if self.open_trivia_db.questions == []:
-            self.stack.set_visible_child_name("results_error_page")
-            self.start_button_stack.set_visible_child_name("label")
-            self.home_button.set_sensitive(True)
+        self.retry_button_stack.set_visible_child_name("label")
+        self.stack.set_visible_child_name("results_error_page")
+        self.start_button_stack.set_visible_child_name("label")
+        self.home_button.set_sensitive(True)
+
+    def remove_spinners(self, *args):
+        self.start_button_stack.set_visible_child_name("label")
+        self.retry_button_stack.set_visible_child_name("label")
+        self.reset_button_stack.set_visible_child_name("label")
 
     def show_question(self):
         for button in self.multiple_buttons:
@@ -155,15 +161,16 @@ class TriviaWindow(Adw.ApplicationWindow):
         if len(self.open_trivia_db.questions) == 0:
             self.open_trivia_db.get_new_trivia_questions(self.amount, self.selected_category, self.selected_difficulty, self.selected_type)
         elif len(self.open_trivia_db.questions) < 2:
-            th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type, self.on_got_questions))
+            th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
             th.start()
 
         self.show_question()
 
     def on_got_questions(self, *args):
         self.start_button_stack.set_visible_child_name("label")
-        self.retry_button_stack.set_visible_child_name("retry_label")
-        self.first_question()
+        self.retry_button_stack.set_visible_child_name("label")
+        if self.stack.get_visible_child_name() != "question_page":
+            self.first_question()
 
     @Gtk.Template.Callback("on_start_button_clicked")
     def on_start_button_clicked(self, btn):
@@ -201,6 +208,13 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.retry_button_stack.set_visible_child_name("retry_spinner")
 
         th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
+        th.start()
+
+    @Gtk.Template.Callback("on_reset_button_clicked")
+    def on_reset_button_clicked(self, btn):
+        self.reset_button_stack.set_visible_child_name("spinner")
+
+        th = threading.Thread(target=self.open_trivia_db.reset_open_trivia_token)
         th.start()
 
     @Gtk.Template.Callback("on_home_button_clicked")
