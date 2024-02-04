@@ -88,26 +88,30 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.selected_type = None
         self.amount = 5
 
+        self.is_empty = False
+        self.no_connection = False
+
         self.open_trivia_db = OpenTriviaDB()
         self.open_trivia_db.connect("connection-error", self.on_backend_connection_error)
         self.open_trivia_db.connect("results-error", self.on_backend_results_error)
         self.open_trivia_db.connect("questions-retrieved", self.on_got_questions)
         self.open_trivia_db.connect("token-reset", self.remove_spinners)
+        self.open_trivia_db.connect("rate-limit", self.on_rate_limit)
 
         self.has_responded = False
 
+    def on_rate_limit(self, *args):
+        self.open_trivia_db.get_new_trivia_questions_with_delay(self.amount, self.selected_category, self.selected_difficulty, self.selected_type)
+
     def on_backend_connection_error(self, *args):
-        self.retry_button_stack.set_visible_child_name("label")
-        if self.open_trivia_db.questions == []:
-            self.stack.set_visible_child_name("error_page")
-            self.start_button_stack.set_visible_child_name("label")
-            self.home_button.set_sensitive(True)
+        print("Connection error")
+        self.no_connection = True
+        self.remove_spinners()
 
     def on_backend_results_error(self, *args):
-        self.retry_button_stack.set_visible_child_name("label")
-        self.stack.set_visible_child_name("results_error_page")
-        self.start_button_stack.set_visible_child_name("label")
-        self.home_button.set_sensitive(True)
+        print("Results error")
+        self.is_empty =True
+        self.remove_spinners()
 
     def remove_spinners(self, *args):
         self.start_button_stack.set_visible_child_name("label")
@@ -153,18 +157,33 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.stack.set_visible_child_name("question_page")
         self.start_button_stack.set_visible_child_name("label")
         self.home_button.set_sensitive(True)
-        self.show_question()
+
+        if self.is_empty:
+            self.stack.set_visible_child_name("results_error_page")
+            self.home_button.set_sensitive(True)
+        elif self.no_connection:
+            self.stack.set_visible_child_name("connection_error_page")
+            self.home_button.set_sensitive(True)
+        else:
+            self.show_question()
 
     def load_next_question(self):
         self.has_responded = False
         self.open_trivia_db.questions.pop(0)
-        if len(self.open_trivia_db.questions) == 0:
-            self.open_trivia_db.get_new_trivia_questions(self.amount, self.selected_category, self.selected_difficulty, self.selected_type)
-        elif len(self.open_trivia_db.questions) < 2:
-            th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
-            th.start()
+        if self.is_empty:
+            self.stack.set_visible_child_name("results_error_page")
+            self.home_button.set_sensitive(True)
+        elif self.no_connection:
+            self.stack.set_visible_child_name("connection_error_page")
+            self.home_button.set_sensitive(True)
+        else:
+            if len(self.open_trivia_db.questions) == 0:
+                self.open_trivia_db.get_new_trivia_questions(self.amount, self.selected_category, self.selected_difficulty, self.selected_type)
+            elif len(self.open_trivia_db.questions) < 2:
+                th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
+                th.start()
 
-        self.show_question()
+            self.show_question()
 
     def on_got_questions(self, *args):
         self.start_button_stack.set_visible_child_name("label")
@@ -205,7 +224,10 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("on_retry_button_clicked")
     def on_retry_button_clicked(self, btn):
-        self.retry_button_stack.set_visible_child_name("retry_spinner")
+        self.retry_button_stack.set_visible_child_name("spinner")
+
+        self.is_empty = False
+        self.no_connection = False
 
         th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
         th.start()
@@ -222,3 +244,6 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.open_trivia_db.reset_questions()
         self.stack.set_visible_child_name("home_page")
         self.home_button.set_sensitive(False)
+
+        self.is_empty = False
+        self.no_connection = False
