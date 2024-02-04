@@ -36,7 +36,6 @@ class TriviaApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
         self.create_action('contribute-to-otdb', self.on_contribute_to_otdb_action)
 
     def do_activate(self):
@@ -56,17 +55,13 @@ class TriviaApplication(Adw.Application):
                                 application_name='Trivia Quiz',
                                 application_icon='io.github.nokse22.trivia-quiz',
                                 developer_name='Nokse',
-                                version='0.1.5',
+                                version='0.2.0',
                                 website='https://github.com/Nokse22/trivia',
                                 issue_url='https://github.com/Nokse22/trivia/issues',
                                 developers=['Nokse'],
                                 license_type=Gtk.License.GPL_3_0,
                                 copyright='© 2023 Nokse')
         about.present()
-
-    def on_preferences_action(self, widget, _):
-        """Callback for the app.preferences action."""
-        print('app.preferences action activated')
 
     def on_contribute_to_otdb_action(self, *args):
         webbrowser.open("https://opentdb.com/")
@@ -85,7 +80,6 @@ class TriviaApplication(Adw.Application):
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
-
 
 def main(version):
     """The application's entry point."""
