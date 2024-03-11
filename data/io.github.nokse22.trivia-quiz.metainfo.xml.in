@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
   <name>Trivia Quiz</name>
-  <developer_name>Nokse</developer_name>
 	<id>io.github.nokse22.trivia-quiz.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
@@ -14,17 +13,29 @@ It uses Open Trivia database.
   <content_rating type="oars-1.0"></content_rating>
   <launchable type="desktop-id">io.github.nokse22.trivia-quiz.desktop</launchable>
 
+  <developer id="io.github.nokse22">
+    <name translatable="no">Nokse</name>
+  </developer>
+
   <url type="homepage">https://github.com/Nokse22/trivia-quiz</url>
   <url type="bugtracker">https://github.com/Nokse22/trivia-quiz/issues</url>
   <url type="vcs-browser">https://github.com/Nokse22/trivia-quiz</url>
   <url type="translate">https://github.com/Nokse22/trivia-quiz/tree/master/po</url>
   <url type="donation">https://ko-fi.com/nokse22</url>
 
+  <branding>
+    <color type="primary" scheme_preference="light">#3988ea</color>
+    <color type="primary" scheme_preference="dark">#103c73</color>
+  </branding>
+
   <releases>
-    <release version="0.2.0" date="2024-02-08">
+    <release version="0.2.0" date="2024-03-11">
 		  <description  translatable="no">
-			  <p>Minor UI improvements</p>
+			  <p>Minor design improvements</p>
 		    <p>Now it won't ask the same question twice anymore</p>
+		    <p>Better screenshots</p>
+		    <p>Branding colors</p>
+		    <p>Better adaptability, now it will work on smartphones too</p>
 		  </description>
 	  </release>
     <release version="0.1.4" date="2023-09-04">
