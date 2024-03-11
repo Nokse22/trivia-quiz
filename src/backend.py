@@ -32,7 +32,9 @@ import time
 class OpenTriviaDB(GObject.GObject):
     __gsignals__ = {
         'connection-error': (GObject.SignalFlags.RUN_FIRST, None, ()),
-        'results-error': (GObject.SignalFlags.RUN_FIRST, None, ()),
+        'no-results': (GObject.SignalFlags.RUN_FIRST, None, ()),
+        'invalid-parameter': (GObject.SignalFlags.RUN_FIRST, None, ()),
+        'token-empty': (GObject.SignalFlags.RUN_FIRST, None, ()),
         'questions-finished': (GObject.SignalFlags.RUN_FIRST, None, ()),
         'questions-retrieved': (GObject.SignalFlags.RUN_FIRST, None, ()),
         'categories-retrieved': (GObject.SignalFlags.RUN_FIRST, None, ()),
@@ -52,7 +54,7 @@ class OpenTriviaDB(GObject.GObject):
         try:
             response = requests.get(token_url)
         except Exception as e:
-            print("error3")
+            self.emit("connection-error")
             return 0
 
         json_data = response.json()
@@ -66,7 +68,7 @@ class OpenTriviaDB(GObject.GObject):
         try:
             response = requests.get(token_url + self.token)
         except Exception as e:
-            print("error4")
+            self.emit("connection-error")
             return 0
 
         self.emit('token-reset')
@@ -107,23 +109,33 @@ class OpenTriviaDB(GObject.GObject):
 
             print(f"response: {response_code}, {token}")
 
+            # Success: Returned results successfully.
             if response_code == 0:
                 pass
+            # No Results: Could not return results. The API doesn't have enough
+            # questions for your query. (Ex. Asking for 50 Questions in a Category that only has 20.)
             elif response_code == 1:
-                self.emit("results-error")
+                self.emit("no-results")
                 self.is_empty = True
                 return
+            # Invalid Parameter: Contains an invalid parameter.
+            # Arguments passed in are not valid. (Ex. Amount = Five)
             elif response_code == 2:
-                self.emit("results-error")
+                self.emit("invalid-parameter")
                 return
+            # Token Not Found: Session Token does not exist.
             elif response_code == 3:
                 self.get_open_trivia_token()
                 time.sleep(5.1)
                 self.get_new_trivia_questions(amount, category, difficulty, question_type)
                 return
+            # Token Empty: Session Token has returned all possible questions
+            # for the specified query. Resetting the Token is necessary.
             elif response_code == 4:
-                self.emit("results-error")
+                self.emit("token-empty")
                 return
+            # Rate Limit: Too many requests have occurred.
+            # Each IP can only access the API once every 5 seconds.
             elif response_code == 5:
                 self.emit('rate-limit')
                 return
