@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-11 19:58+0100\n"
-"PO-Revision-Date: 2024-03-11 20:16+0100\n"
+"PO-Revision-Date: 2024-04-01 20:16+0100\n"
 "Last-Translator: Albano Battistella <albanobattistella@gmail.com>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
@@ -58,11 +58,11 @@ msgstr ""
 
 #: src/window.ui:406 src/window.ui:470
 msgid "No More Questions"
-msgstr "Basta domande"
+msgstr "Nessun altra domanda"
 
 #: src/window.ui:425
 msgid "Reset"
-msgstr ""
+msgstr "Resetta"
 
 #: src/window.ui:467
 msgid "There are no questions for this set of parameters."
