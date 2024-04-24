@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-11 19:58+0100\n"
+"PO-Revision-Date: 2024-04-24 16:58+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: data/io.github.nokse22.trivia-quiz.desktop.in:3 src/window.ui:63
+msgid "Trivia Quiz"
+msgstr "Variaquiz"
+
+#: data/io.github.nokse22.trivia-quiz.desktop.in:9
+msgid "GNOME;GTK;ArcadeGame;Game;"
+msgstr "GNOME;GTK;Game;Spel;Vragen;Vraag;"
+
+#: src/window.ui:149
+msgid "Start"
+msgstr "Beginnen"
+
+#: src/window.ui:239
+msgid "True"
+msgstr "Waar"
+
+#: src/window.ui:246
+msgid "False"
+msgstr "Niet waar"
+
+#: src/window.ui:340
+msgid "There was an error connecting to the server."
+msgstr "Er kan geen verbinding met de server worden gemaakt."
+
+#: src/window.ui:343
+msgid "No Connection"
+msgstr "Geen internetverbinding"
+
+#: src/window.ui:362
+msgid "Retry"
+msgstr "Opnieuw proberen"
+
+#: src/window.ui:403
+msgid ""
+"There are no more questions for this set of parameters. Reset your token or "
+"change parameters."
+msgstr ""
+"Er zijn geen vragen meer binnen deze reeks. Begin opnieuw of pas de reeks "
+"aan."
+
+#: src/window.ui:406 src/window.ui:470
+msgid "No More Questions"
+msgstr "Vragenpot is leeg"
+
+#: src/window.ui:425
+msgid "Reset"
+msgstr "Opnieuw beginnen"
+
+#: src/window.ui:467
+msgid "There are no questions for this set of parameters."
+msgstr "Er zijn geen vragen binnen deze reeks."
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Algemeen"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Sneltoetsen tonen"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Afsluiten"
