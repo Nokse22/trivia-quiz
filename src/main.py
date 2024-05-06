@@ -44,14 +44,14 @@ class TriviaApplication(Adw.Application):
         We raise the application's main window, creating it if
         necessary.
         """
-        win = self.props.active_window
-        if not win:
-            win = TriviaWindow(application=self)
-        win.present()
+        self.win = self.props.active_window
+        if not self.win:
+            self.win = TriviaWindow(application=self)
+        self.win.present()
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
+        about = Adw.AboutDialog(
                                 application_name='Trivia Quiz',
                                 application_icon='io.github.nokse22.trivia-quiz',
                                 developer_name='Nokse',
@@ -61,7 +61,7 @@ class TriviaApplication(Adw.Application):
                                 developers=['Nokse'],
                                 license_type=Gtk.License.GPL_3_0,
                                 copyright='© 2023 Nokse')
-        about.present()
+        about.present(self.win)
 
     def on_contribute_to_otdb_action(self, *args):
         webbrowser.open("https://opentdb.com/")
