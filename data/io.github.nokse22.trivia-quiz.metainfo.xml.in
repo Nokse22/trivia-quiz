@@ -68,18 +68,22 @@ It uses Open Trivia database.
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/Nokse22/trivia-quiz/master/data/resources/screenshot%201.png</image>
+      <caption>The home page of the app with the questions parameters</caption>
     </screenshot>
 
 	  <screenshot>
 	    <image>https://raw.githubusercontent.com/Nokse22/trivia-quiz/master/data/resources/screenshot%202.png</image>
+	    <caption>A multiple answers question</caption>
 	  </screenshot>
 
 	  <screenshot>
 	    <image>https://raw.githubusercontent.com/Nokse22/trivia-quiz/master/data/resources/screenshot%203.png</image>
+	    <caption>A multiple answers question</caption>
 	  </screenshot>
 	  
 	  <screenshot>
 	    <image>https://raw.githubusercontent.com/Nokse22/trivia-quiz/master/data/resources/screenshot%204.png</image>
+	    <caption>A true or false question</caption>
 	  </screenshot>
   </screenshots>
 
