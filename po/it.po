@@ -1,0 +1,84 @@
+# ITALIAN TRANSLATION.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ALBANO BATTISTELLA  <albanobattistella@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-11 19:58+0100\n"
+"PO-Revision-Date: 2024-04-01 20:16+0100\n"
+"Last-Translator: Albano Battistella <albanobattistella@gmail.com>\n"
+"Language-Team: Italian <LL@li.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.github.nokse22.trivia-quiz.desktop.in:3 src/window.ui:63
+msgid "Trivia Quiz"
+msgstr "Trivia Quiz"
+
+#: data/io.github.nokse22.trivia-quiz.desktop.in:9
+msgid "GNOME;GTK;ArcadeGame;Game;"
+msgstr "GNOME;GTK;Gioco arcade;Gioco;"
+
+#: src/window.ui:149
+msgid "Start"
+msgstr "Inizio"
+
+#: src/window.ui:239
+msgid "True"
+msgstr "Vero"
+
+#: src/window.ui:246
+msgid "False"
+msgstr "Falso"
+
+#: src/window.ui:340
+msgid "There was an error connecting to the server."
+msgstr "Si è verificato un errore durante la connessione al server."
+
+#: src/window.ui:343
+msgid "No Connection"
+msgstr "Nessuna connessione"
+
+#: src/window.ui:362
+msgid "Retry"
+msgstr "Riprova"
+
+#: src/window.ui:403
+msgid ""
+"There are no more questions for this set of parameters. Reset your token or "
+"change parameters."
+msgstr ""
+"Non ci sono più domande per questo set di parametri. Reimposta il tuo token o "
+"modifica i parametri."
+
+#: src/window.ui:406 src/window.ui:470
+msgid "No More Questions"
+msgstr "Nessun altra domanda"
+
+#: src/window.ui:425
+msgid "Reset"
+msgstr "Resetta"
+
+#: src/window.ui:467
+msgid "There are no questions for this set of parameters."
+msgstr "Non ci sono domande per questo insieme di parametri."
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Generale"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Mostra scorciatoie"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Uscita"
