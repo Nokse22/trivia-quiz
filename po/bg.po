@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# twlvnn <kraft_werk@tutanota.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: trivia-quiz\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-11 19:58+0100\n"
+"PO-Revision-Date: 2024-04-28 13:40+0200\n"
+"Last-Translator: twlvnn <kraft_werk@tutanota.com>\n"
+"Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 46.0\n"
+
+#: data/io.github.nokse22.trivia-quiz.desktop.in:3 src/window.ui:63
+msgid "Trivia Quiz"
+msgstr "Тривия Тест"
+
+#: data/io.github.nokse22.trivia-quiz.desktop.in:9
+msgid "GNOME;GTK;ArcadeGame;Game;"
+msgstr "Играл;АркаднаИгра"
+
+#: src/window.ui:149
+msgid "Start"
+msgstr "Пускане"
+
+#: src/window.ui:239
+msgid "True"
+msgstr "Истина"
+
+#: src/window.ui:246
+msgid "False"
+msgstr "Лъжа"
+
+#: src/window.ui:340
+msgid "There was an error connecting to the server."
+msgstr "Грешка при свързване със сървъра."
+
+#: src/window.ui:343
+msgid "No Connection"
+msgstr "Няма връзка с мрежата"
+
+#: src/window.ui:362
+msgid "Retry"
+msgstr "Повторете"
+
+#: src/window.ui:403
+msgid ""
+"There are no more questions for this set of parameters. Reset your token or "
+"change parameters."
+msgstr ""
+"За тези параметри няма повече въпроси. Установете наново токен или си или "
+"променете параметрите."
+
+#: src/window.ui:406 src/window.ui:470
+msgid "No More Questions"
+msgstr "Няма повече въпроси"
+
+#: src/window.ui:425
+msgid "Reset"
+msgstr "Върнете, анулирайте, установявам наново"
+
+#: src/window.ui:467
+msgid "There are no questions for this set of parameters."
+msgstr "За тези параметри няма въпроси."
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Общи"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Показване на клавишните комбинации"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Спиране на програмата"
