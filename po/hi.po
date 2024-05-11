@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: trivia-quiz\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-11 19:58+0100\n"
-"PO-Revision-Date: 2024-04-04 01:16+0530\n"
+"PO-Revision-Date: 2024-05-11 15:14+0530\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
-"Language-Team: Hindi\n"
+"Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 46.0\n"
+"X-Generator: Gtranslator 46.1\n"
 
 #: data/io.github.nokse22.trivia-quiz.desktop.in:3 src/window.ui:63
 msgid "Trivia Quiz"
@@ -33,11 +33,11 @@ msgstr "प्रारंभ"
 
 #: src/window.ui:239
 msgid "True"
-msgstr "सत्य"
+msgstr "सही"
 
 #: src/window.ui:246
 msgid "False"
-msgstr "असत्य"
+msgstr "गलत"
 
 #: src/window.ui:340
 msgid "There was an error connecting to the server."
@@ -56,7 +56,7 @@ msgid ""
 "There are no more questions for this set of parameters. Reset your token or "
 "change parameters."
 msgstr ""
-"मापदंडों के इस सेट के लिए कोई और प्रश्न नहीं हैं। अपना टोकन रीसेट करें या मापदंड बदलें।"
+"मापदंडों के इस समूह के लिए कोई और प्रश्न नहीं हैं। अपना टोकन रीसेट करें या मापदंड बदलें।"
 
 #: src/window.ui:406 src/window.ui:470
 msgid "No More Questions"
@@ -64,21 +64,21 @@ msgstr "कोई और प्रश्न नहीं"
 
 #: src/window.ui:425
 msgid "Reset"
-msgstr "रीसेट"
+msgstr "रीसेट करें"
 
 #: src/window.ui:467
 msgid "There are no questions for this set of parameters."
-msgstr "मापदंडों के इस सेट के लिए कोई प्रश्न नहीं हैं।"
+msgstr "मापदंडों के इस समूह के लिए कोई प्रश्न नहीं हैं।"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "जनरल"
+msgstr "सामान्य"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "शॉर्टकट दिखाएँ"
+msgstr "शॉर्टकट दिखाएं"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
