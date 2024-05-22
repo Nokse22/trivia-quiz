@@ -228,9 +228,8 @@ class TriviaWindow(Adw.ApplicationWindow):
             question = self.open_trivia_db.questions[0]
         except:
             return
-        answer = btn.get_child().get_label()
 
-        if answer == question.correct_answer:
+        if btn == self.correct_button:
             btn.add_css_class("success")
             GLib.timeout_add(1000, self.load_next_question)
         else:
