@@ -2,6 +2,9 @@
 <component type="desktop">
   <name>Trivia Quiz</name>
 	<id>io.github.nokse22.trivia-quiz</id>
+  <provides>
+    <id>io.github.nokse22.trivia-quiz.desktop</id>
+  </provides>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
   <summary>Respond to endless questions</summary>
@@ -29,13 +32,17 @@ It uses Open Trivia database.
   </branding>
 
   <releases>
-    <release version="0.2.0" date="2024-03-11">
+    <release version="0.2.1" date="2024-05-22">
 		  <description  translatable="no">
 			  <p>Minor design improvements</p>
 		    <p>Now it won't ask the same question twice anymore</p>
 		    <p>Better screenshots</p>
 		    <p>Branding colors</p>
 		    <p>Better adaptability, now it will work on smartphones too</p>
+		    <p>Added Hindi translation</p>
+		    <p>Added Dutch translation</p>
+		    <p>Added Bulgarian translation</p>
+		    <p>Added Italian translation</p>
 		  </description>
 	  </release>
     <release version="0.1.4" date="2023-09-04">
