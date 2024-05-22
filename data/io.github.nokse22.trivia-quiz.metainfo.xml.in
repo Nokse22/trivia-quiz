@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
   <name>Trivia Quiz</name>
-	<id>io.github.nokse22.trivia-quiz.desktop</id>
+	<id>io.github.nokse22.trivia-quiz</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
   <summary>Respond to endless questions</summary>
@@ -14,7 +14,7 @@ It uses Open Trivia database.
   <launchable type="desktop-id">io.github.nokse22.trivia-quiz.desktop</launchable>
 
   <developer id="io.github.nokse22">
-    <name translate="no">Nokse</name>
+    <name translatable="no">Nokse</name>
   </developer>
 
   <url type="homepage">https://github.com/Nokse22/trivia-quiz</url>
@@ -30,7 +30,7 @@ It uses Open Trivia database.
 
   <releases>
     <release version="0.2.0" date="2024-03-11">
-		  <description  translate="no">
+		  <description  translatable="no">
 			  <p>Minor design improvements</p>
 		    <p>Now it won't ask the same question twice anymore</p>
 		    <p>Better screenshots</p>
@@ -39,27 +39,27 @@ It uses Open Trivia database.
 		  </description>
 	  </release>
     <release version="0.1.4" date="2023-09-04">
-		  <description  translate="no">
+		  <description  translatable="no">
 			  <p>Fixed bug</p>
 		  </description>
 	  </release>
     <release version="0.1.3" date="2023-08-22">
-		  <description  translate="no">
+		  <description  translatable="no">
 			  <p>changed app id</p>
 		  </description>
 	  </release>
     <release version="0.1.2" date="2023-08-22">
-		  <description  translate="no">
+		  <description  translatable="no">
 			  <p>Fixed bugs</p>
 		  </description>
 	  </release>
     <release version="0.1.1" date="2023-08-22">
-		  <description  translate="no">
+		  <description  translatable="no">
 			  <p>Rename the app to trivia quiz</p>
 		  </description>
 	  </release>
     <release version="0.1.0" date="2023-08-22">
-		  <description  translate="no">
+		  <description  translatable="no">
 			  <p>First release!</p>
 		  </description>
 	  </release>
