@@ -2,85 +2,85 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Scrambled777 <weblate.scrambled777@simplelogin.com>, 2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: trivia-quiz\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-11 19:58+0100\n"
-"PO-Revision-Date: 2024-05-11 15:14+0530\n"
-"Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
-"Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
-"Language: hi\n"
+"PO-Revision-Date: 2024-04-24 16:58+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 46.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/io.github.nokse22.trivia-quiz.desktop.in:3 src/window.ui:63
 msgid "Trivia Quiz"
-msgstr "Trivia Quiz"
+msgstr "Variaquiz"
 
 #: data/io.github.nokse22.trivia-quiz.desktop.in:9
 msgid "GNOME;GTK;ArcadeGame;Game;"
-msgstr "GNOME;GTK;आर्केडखेल;खेल;"
+msgstr "GNOME;GTK;Game;Spel;Vragen;Vraag;"
 
 #: src/window.ui:149
 msgid "Start"
-msgstr "प्रारंभ"
+msgstr "Beginnen"
 
 #: src/window.ui:239
 msgid "True"
-msgstr "सही"
+msgstr "Waar"
 
 #: src/window.ui:246
 msgid "False"
-msgstr "गलत"
+msgstr "Niet waar"
 
 #: src/window.ui:340
 msgid "There was an error connecting to the server."
-msgstr "सर्वर से जुड़ने में त्रुटि हुई।"
+msgstr "Er kan geen verbinding met de server worden gemaakt."
 
 #: src/window.ui:343
 msgid "No Connection"
-msgstr "कोई कनेक्शन नहीं"
+msgstr "Geen internetverbinding"
 
 #: src/window.ui:362
 msgid "Retry"
-msgstr "पुन: प्रयास करें"
+msgstr "Opnieuw proberen"
 
 #: src/window.ui:403
 msgid ""
 "There are no more questions for this set of parameters. Reset your token or "
 "change parameters."
 msgstr ""
-"मापदंडों के इस समूह के लिए कोई और प्रश्न नहीं हैं। अपना टोकन रीसेट करें या मापदंड बदलें।"
+"Er zijn geen vragen meer binnen deze reeks. Begin opnieuw of pas de reeks "
+"aan."
 
 #: src/window.ui:406 src/window.ui:470
 msgid "No More Questions"
-msgstr "कोई और प्रश्न नहीं"
+msgstr "Vragenpot is leeg"
 
 #: src/window.ui:425
 msgid "Reset"
-msgstr "रीसेट करें"
+msgstr "Opnieuw beginnen"
 
 #: src/window.ui:467
 msgid "There are no questions for this set of parameters."
-msgstr "मापदंडों के इस समूह के लिए कोई प्रश्न नहीं हैं।"
+msgstr "Er zijn geen vragen binnen deze reeks."
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "सामान्य"
+msgstr "Algemeen"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "शॉर्टकट दिखाएं"
+msgstr "Sneltoetsen tonen"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "छोड़ें"
+msgstr "Afsluiten"
