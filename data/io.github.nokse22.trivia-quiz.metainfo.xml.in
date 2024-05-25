@@ -11,7 +11,8 @@
 	<description>
 	  <p>This app let's you respond to an endless stream of questions.
 It uses Open Trivia database.
-	  </p>
+
+Questions are only available in English.</p>
 	</description>
   <content_rating type="oars-1.0"></content_rating>
   <launchable type="desktop-id">io.github.nokse22.trivia-quiz.desktop</launchable>
