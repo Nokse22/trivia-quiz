@@ -32,6 +32,15 @@ Questions are only available in English.</p>
     <color type="primary" scheme_preference="dark">#103c73</color>
   </branding>
 
+  <recommends>
+    <display_length compare="ge">360</display_length>
+  </recommends>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+
   <releases>
     <release version="0.2.2" date="2024-05-25">
 		  <description  translatable="no">
