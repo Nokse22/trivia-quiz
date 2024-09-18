@@ -52,15 +52,15 @@ class TriviaApplication(Adw.Application):
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(
-                                application_name='Trivia Quiz',
-                                application_icon='io.github.nokse22.trivia-quiz',
-                                developer_name='Nokse',
-                                version='0.2.2',
-                                website='https://github.com/Nokse22/trivia',
-                                issue_url='https://github.com/Nokse22/trivia/issues',
-                                developers=['Nokse'],
-                                license_type=Gtk.License.GPL_3_0,
-                                copyright='© 2023 Nokse')
+            application_name='Trivia Quiz',
+            application_icon='io.github.nokse22.trivia-quiz',
+            developer_name='Nokse',
+            version='1.0.0',
+            website='https://github.com/Nokse22/trivia',
+            issue_url='https://github.com/Nokse22/trivia/issues',
+            developers=['Nokse'],
+            license_type=Gtk.License.GPL_3_0,
+            copyright='© 2023 Nokse')
         about.present(self.win)
 
     def on_contribute_to_otdb_action(self, *args):

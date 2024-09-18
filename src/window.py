@@ -55,13 +55,13 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     answers_stack = Gtk.Template.Child()
 
-    answer_1 =  Gtk.Template.Child()
-    answer_2 =  Gtk.Template.Child()
-    answer_3 =  Gtk.Template.Child()
-    answer_4 =  Gtk.Template.Child()
+    answer_1 = Gtk.Template.Child()
+    answer_2 = Gtk.Template.Child()
+    answer_3 = Gtk.Template.Child()
+    answer_4 = Gtk.Template.Child()
 
-    true_button =  Gtk.Template.Child()
-    false_button =  Gtk.Template.Child()
+    true_button = Gtk.Template.Child()
+    false_button = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -70,15 +70,36 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         self.types = {"Any Type": None, "Multiple Choice": "multiple", "True or False": "boolean"}
 
-        self.categories = {'Any Category': None, 'General Knowledge': 9, 'Entertainment: Books': 10,
-                'Entertainment: Film': 11, 'Entertainment: Music': 12, 'Entertainment: Musicals & Theatres': 13,
-                'Entertainment: Television': 14, 'Entertainment: Video Games': 15, 'Entertainment: Board Games': 16,
-                'Science & Nature': 17, 'Science: Computers': 18, 'Science: Mathematics': 19, 'Mythology': 20,
-                'Sports': 21, 'Geography': 22, 'History': 23, 'Politics': 24, 'Art': 25, 'Celebrities': 26, 'Animals': 27,
-                'Vehicles': 28, 'Entertainment: Comics': 29, 'Science: Gadgets': 30,
-                'Entertainment: Japanese Anime & Manga': 31, 'Entertainment: Cartoon & Animations': 32}
+        self.categories = {
+            'Any Category': None,
+            'General Knowledge': 9,
+            'Entertainment: Books': 10,
+            'Entertainment: Film': 11,
+            'Entertainment: Music': 12,
+            'Entertainment: Musicals & Theatres': 13,
+            'Entertainment: Television': 14,
+            'Entertainment: Video Games': 15,
+            'Entertainment: Board Games': 16,
+            'Science & Nature': 17,
+            'Science: Computers': 18,
+            'Science: Mathematics': 19,
+            'Mythology': 20,
+            'Sports': 21,
+            'Geography': 22,
+            'History': 23,
+            'Politics': 24,
+            'Art': 25,
+            'Celebrities': 26,
+            'Animals': 27,
+            'Vehicles': 28,
+            'Entertainment: Comics': 29,
+            'Science: Gadgets': 30,
+            'Entertainment: Japanese Anime & Manga': 31,
+            'Entertainment: Cartoon & Animations': 32
+        }
 
-        self.multiple_buttons = [self.answer_1, self.answer_2, self.answer_3, self.answer_4]
+        self.multiple_buttons = [
+            self.answer_1, self.answer_2, self.answer_3, self.answer_4]
         self.true_false_buttons = [self.true_button, self.false_button]
 
         self.correct_button = None
@@ -92,13 +113,21 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.no_connection = False
 
         self.open_trivia_db = OpenTriviaDB()
-        self.open_trivia_db.connect("connection-error", self.on_connection_error)
-        self.open_trivia_db.connect("no-results", self.on_no_results)
-        self.open_trivia_db.connect("invalid-parameter", self.on_invalid_parameter)
-        self.open_trivia_db.connect("token-empty", self.on_token_empty)
-        self.open_trivia_db.connect("questions-retrieved", self.on_got_questions)
-        self.open_trivia_db.connect("token-reset", self.remove_spinners)
-        self.open_trivia_db.connect("rate-limit", self.on_rate_limit)
+
+        self.open_trivia_db.connect(
+            "connection-error", self.on_connection_error)
+        self.open_trivia_db.connect(
+            "no-results", self.on_no_results)
+        self.open_trivia_db.connect(
+            "invalid-parameter", self.on_invalid_parameter)
+        self.open_trivia_db.connect(
+            "token-empty", self.on_token_empty)
+        self.open_trivia_db.connect(
+            "questions-retrieved", self.on_got_questions)
+        self.open_trivia_db.connect(
+            "token-reset", self.remove_spinners)
+        self.open_trivia_db.connect(
+            "rate-limit", self.on_rate_limit)
 
         self.has_responded = False
 
@@ -114,7 +143,12 @@ class TriviaWindow(Adw.ApplicationWindow):
             self.home_button.set_sensitive(True)
 
     def on_rate_limit(self, *args):
-        self.open_trivia_db.get_new_trivia_questions_with_delay(self.amount, self.selected_category, self.selected_difficulty, self.selected_type)
+        self.open_trivia_db.get_new_trivia_questions_with_delay(
+            self.amount,
+            self.selected_category,
+            self.selected_difficulty,
+            self.selected_type
+        )
 
     def on_connection_error(self, *args):
         print("Connection error")
@@ -141,7 +175,7 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         try:
             question = self.open_trivia_db.questions[0]
-        except:
+        except Exception:
             return
 
         self.category_label.set_label(question.category.capitalize())
@@ -209,13 +243,18 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("on_start_button_clicked")
     def on_start_button_clicked(self, btn):
-        self.selected_difficulty = self.difficulties[self.difficulty_row.get_selected_item().get_string()]
-        self.selected_category = self.categories[self.category_row.get_selected_item().get_string()]
-        self.selected_type = self.types[self.type_row.get_selected_item().get_string()]
+        self.selected_difficulty = self.difficulties[
+            self.difficulty_row.get_selected_item().get_string()]
+        self.selected_category = self.categories[
+            self.category_row.get_selected_item().get_string()]
+        self.selected_type = self.types[
+            self.type_row.get_selected_item().get_string()]
 
         self.start_button_stack.set_visible_child_name("spinner")
 
-        th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
+        th = threading.Thread(
+            target=self.open_trivia_db.get_new_trivia_questions,
+            args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
         th.start()
 
     @Gtk.Template.Callback("on_answer_button_clicked")
@@ -226,7 +265,7 @@ class TriviaWindow(Adw.ApplicationWindow):
 
         try:
             question = self.open_trivia_db.questions[0]
-        except:
+        except Exception:
             return
 
         if btn == self.correct_button:
@@ -244,14 +283,17 @@ class TriviaWindow(Adw.ApplicationWindow):
         self.empty_token = False
         self.no_connection = False
 
-        th = threading.Thread(target=self.open_trivia_db.get_new_trivia_questions, args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
+        th = threading.Thread(
+            target=self.open_trivia_db.get_new_trivia_questions,
+            args=(self.amount, self.selected_category, self.selected_difficulty, self.selected_type))
         th.start()
 
     @Gtk.Template.Callback("on_reset_button_clicked")
     def on_reset_button_clicked(self, btn):
         self.reset_button_stack.set_visible_child_name("spinner")
 
-        th = threading.Thread(target=self.open_trivia_db.reset_open_trivia_token)
+        th = threading.Thread(
+            target=self.open_trivia_db.reset_open_trivia_token)
         th.start()
 
     @Gtk.Template.Callback("on_home_button_clicked")
