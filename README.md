@@ -10,9 +10,9 @@ This app let's you respond to an endless stream of questions.
 It uses the [Open Trivia database](https://opentdb.com). 
 
   <div align="center">
-  <img src="data/resources/screenshot 1.png" height="320"/>
-  <img src="data/resources/screenshot 2.png" height="320"/>
-  <img src="data/resources/screenshot 3.png" height="320"/>
+  <img src="data/resources/screenshot 1.png" max-height="400"/>
+  <img src="data/resources/screenshot 2.png" max-height="400"/>
+  <img src="data/resources/screenshot 3.png" max-height="400"/>
   </div>
   
 ## Installation
