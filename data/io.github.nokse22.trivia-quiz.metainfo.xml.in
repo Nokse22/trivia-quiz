@@ -42,6 +42,11 @@ Questions are only available in English.</p>
   </supports>
 
   <releases>
+    <release version="1.0.1" date="2024-09-18">
+		  <description  translatable="no">
+			  <p>Updated Spinners to new Libadwaita ones</p>
+		  </description>
+	  </release>
     <release version="1.0.0" date="2024-09-18">
 		  <description  translatable="no">
 			  <p>Updated to GNOME 47!</p>
