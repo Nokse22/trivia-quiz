@@ -17,16 +17,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import sys
-import gi
-
-import webbrowser
-
-gi.require_version('Gtk', '4.0')
-gi.require_version('Adw', '1')
-
 from gi.repository import Gtk, Gio, Adw
 from .window import TriviaWindow
+
+import sys
+import webbrowser
+
 
 class TriviaApplication(Adw.Application):
     """The main application singleton class."""
@@ -36,7 +32,8 @@ class TriviaApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('contribute-to-otdb', self.on_contribute_to_otdb_action)
+        self.create_action(
+            'contribute-to-otdb', self.on_contribute_to_otdb_action)
 
     def do_activate(self):
         """Called when the application is activated.
@@ -55,7 +52,7 @@ class TriviaApplication(Adw.Application):
             application_name='Trivia Quiz',
             application_icon='io.github.nokse22.trivia-quiz',
             developer_name='Nokse',
-            version='1.0.1',
+            version='1.1.0',
             website='https://github.com/Nokse22/trivia',
             issue_url='https://github.com/Nokse22/trivia/issues',
             developers=['Nokse'],
@@ -80,6 +77,7 @@ class TriviaApplication(Adw.Application):
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
+
 
 def main(version):
     """The application's entry point."""
