@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-11 19:58+0100\n"
+"PO-Revision-Date: 2026-03-22 13:44+0100\n"
+"Last-Translator: Radoš Milićev <https://github.com/rammba>\n"
+"Language-Team: \n"
+"Language: sr@latin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: data/io.github.nokse22.trivia-quiz.desktop.in:3 src/window.ui:63
+msgid "Trivia Quiz"
+msgstr "Trivia Quiz"
+
+#: data/io.github.nokse22.trivia-quiz.desktop.in:9
+msgid "GNOME;GTK;ArcadeGame;Game;"
+msgstr "GNOME;GTK;ArcadeGame;Game;"
+
+#: src/window.ui:149
+msgid "Start"
+msgstr "Počni"
+
+#: src/window.ui:239
+msgid "True"
+msgstr "Tačno"
+
+#: src/window.ui:246
+msgid "False"
+msgstr "Netačno"
+
+#: src/window.ui:340
+msgid "There was an error connecting to the server."
+msgstr "Došlo je do greške pri konekciji sa serverom."
+
+#: src/window.ui:343
+msgid "No Connection"
+msgstr "Bez konekcije"
+
+#: src/window.ui:362
+msgid "Retry"
+msgstr "Pokušaj ponovo"
+
+#: src/window.ui:403
+msgid ""
+"There are no more questions for this set of parameters. Reset your token or "
+"change parameters."
+msgstr ""
+"Nema više pitanja za ovakve parametre. Resetuj token ili promeni parametre."
+
+#: src/window.ui:406 src/window.ui:470
+msgid "No More Questions"
+msgstr "Nema više pitanja"
+
+#: src/window.ui:425
+msgid "Reset"
+msgstr "Resetuj"
+
+#: src/window.ui:467
+msgid "There are no questions for this set of parameters."
+msgstr "Nema pitanja za ovakve parametre."
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Opšte"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Prikaži prečice"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Izlaz"
