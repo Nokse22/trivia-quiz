@@ -32,6 +32,10 @@ import threading
 from .question import Question
 from .backend import OpenTriviaDB
 
+# Text symbols (not emoji) so GTK foreground color applies; avoids clashing with fills
+_CORRECT_MARK = "\u2713"  # ✓
+_INCORRECT_MARK = "\u2717"  # ✗
+
 @Gtk.Template(resource_path='/io/github/nokse22/trivia-quiz/window.ui')
 class TriviaWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TriviaQuizWindow'
@@ -65,6 +69,8 @@ class TriviaWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        self.settings = Gio.Settings.new('io.github.nokse22.trivia-quiz')
 
         self.difficulties = {"Any Difficulty": None, "Easy": "easy", "Medium": "medium", "Hard": "hard"}
 
@@ -268,12 +274,29 @@ class TriviaWindow(Adw.ApplicationWindow):
         except Exception:
             return
 
+        if self.settings.get_boolean("colorblind-mode"):
+            correct_class = "colorblind-correct"
+            incorrect_class = "colorblind-incorrect"
+        else:
+            correct_class = "success"
+            incorrect_class = "error"
+
+        def append_icon(button, mark):
+            if button in self.multiple_buttons:
+                lbl = button.get_child()
+                lbl.set_label(f"{mark} {lbl.get_label()}")
+            else:
+                button.set_label(f"{mark} {button.get_label()}")
+
         if btn == self.correct_button:
-            btn.add_css_class("success")
+            btn.add_css_class(correct_class)
+            append_icon(btn, _CORRECT_MARK)
             GLib.timeout_add(1000, self.load_next_question)
         else:
-            btn.add_css_class("error")
-            self.correct_button.add_css_class("success")
+            btn.add_css_class(incorrect_class)
+            append_icon(btn, _INCORRECT_MARK)
+            self.correct_button.add_css_class(correct_class)
+            append_icon(self.correct_button, _CORRECT_MARK)
             GLib.timeout_add(1000, self.load_next_question)
 
     @Gtk.Template.Callback("on_retry_button_clicked")

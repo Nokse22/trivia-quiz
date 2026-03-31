@@ -484,6 +484,10 @@ suggested-action</property>
   <menu id="primary_menu">
     <section>
       <item>
+        <attribute name="action">app.colorblind-mode</attribute>
+        <attribute name="label">Colorblind Mode</attribute>
+      </item>
+      <item>
         <attribute name="action">app.contribute-to-otdb</attribute>
         <attribute name="label">Contribute to Open Trivia DB</attribute>
       </item>
