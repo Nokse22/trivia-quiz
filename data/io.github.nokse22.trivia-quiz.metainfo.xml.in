@@ -21,10 +21,10 @@ Questions are only available in English.</p>
     <name translatable="no">Nokse</name>
   </developer>
 
-  <url type="homepage">https://github.com/Nokse22/trivia-quiz</url>
-  <url type="bugtracker">https://github.com/Nokse22/trivia-quiz/issues</url>
-  <url type="vcs-browser">https://github.com/Nokse22/trivia-quiz</url>
-  <url type="translate">https://github.com/Nokse22/trivia-quiz/tree/master/po</url>
+  <url type="homepage">https://github.com/grahamthetvi/trivia-quiz</url>
+  <url type="bugtracker">https://github.com/grahamthetvi/trivia-quiz/issues</url>
+  <url type="vcs-browser">https://github.com/grahamthetvi/trivia-quiz</url>
+  <url type="translate">https://github.com/grahamthetvi/trivia-quiz/tree/master/po</url>
   <url type="donation">https://ko-fi.com/nokse22</url>
 
   <branding>
@@ -106,22 +106,22 @@ Questions are only available in English.</p>
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Nokse22/trivia-quiz/master/data/resources/screenshot%201.png</image>
+      <image>https://raw.githubusercontent.com/grahamthetvi/trivia-quiz/master/data/resources/screenshot%201.png</image>
       <caption>The home page of the app with the questions parameters</caption>
     </screenshot>
 
 	  <screenshot>
-	    <image>https://raw.githubusercontent.com/Nokse22/trivia-quiz/master/data/resources/screenshot%202.png</image>
+	    <image>https://raw.githubusercontent.com/grahamthetvi/trivia-quiz/master/data/resources/screenshot%202.png</image>
 	    <caption>A multiple answers question</caption>
 	  </screenshot>
 
 	  <screenshot>
-	    <image>https://raw.githubusercontent.com/Nokse22/trivia-quiz/master/data/resources/screenshot%203.png</image>
+	    <image>https://raw.githubusercontent.com/grahamthetvi/trivia-quiz/master/data/resources/screenshot%203.png</image>
 	    <caption>A true or false question</caption>
 	  </screenshot>
 	  
 	  <screenshot>
-	    <image>https://raw.githubusercontent.com/Nokse22/trivia-quiz/master/data/resources/screenshot%204.png</image>
+	    <image>https://raw.githubusercontent.com/grahamthetvi/trivia-quiz/master/data/resources/screenshot%204.png</image>
 	    <caption>A multiple answers question</caption>
 	  </screenshot>
   </screenshots>

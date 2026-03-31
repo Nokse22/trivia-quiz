@@ -3,11 +3,11 @@ base: core22
 adopt-info: trivia-quiz
 grade: stable 
 confinement: strict 
-website: https://github.com/Nokse22/trivia-quiz
+website: https://github.com/grahamthetvi/trivia-quiz
 license: GPL-3.0
-source-code: https://github.com/Nokse22/trivia-quiz
-issues: https://github.com/Nokse22/trivia-quiz/issues
-contact: https://github.com/Nokse22/trivia-quiz
+source-code: https://github.com/grahamthetvi/trivia-quiz
+issues: https://github.com/grahamthetvi/trivia-quiz/issues
+contact: https://github.com/grahamthetvi/trivia-quiz
 compression: lzo
 architectures:
   - build-on: amd64
@@ -17,7 +17,7 @@ architectures:
 parts:
   trivia-quiz:
     plugin: meson
-    source: https://github.com/Nokse22/trivia-quiz.git
+    source: https://github.com/grahamthetvi/trivia-quiz.git
     source-depth: 1
     parse-info: [ usr/share/metainfo/io.github.nokse22.trivia-quiz.metainfo.xml ]
     build-packages:
