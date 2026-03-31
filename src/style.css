@@ -1,0 +1,41 @@
+/* Darker fills + light foreground so ✓/✗ (text glyphs) stay visible, not emoji hues */
+button.success {
+  background-color: #3a8f5f;
+  color: #ffffff;
+}
+
+button.success:hover {
+  background-color: #2d7a4e;
+  color: #ffffff;
+}
+
+button.error {
+  background-color: #c42d3d;
+  color: #ffffff;
+}
+
+button.error:hover {
+  background-color: #b91c2c;
+  color: #ffffff;
+}
+
+/* Okabe–Ito blue vs vermillion: distinguishable for common color-vision deficiencies */
+button.colorblind-correct {
+  background-color: #0d7ec4;
+  color: #ffffff;
+}
+
+button.colorblind-correct:hover {
+  background-color: #0072b2;
+  color: #ffffff;
+}
+
+button.colorblind-incorrect {
+  background-color: #e06a12;
+  color: #ffffff;
+}
+
+button.colorblind-incorrect:hover {
+  background-color: #d55e00;
+  color: #ffffff;
+}

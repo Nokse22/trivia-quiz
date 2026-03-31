@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gtk, Gio, Adw
+from gi.repository import Gtk, Gio, Adw, Gdk
 from .window import TriviaWindow
 
 import sys
@@ -35,12 +35,24 @@ class TriviaApplication(Adw.Application):
         self.create_action(
             'contribute-to-otdb', self.on_contribute_to_otdb_action)
 
+        self.settings = Gio.Settings.new('io.github.nokse22.trivia-quiz')
+        colorblind_action = self.settings.create_action('colorblind-mode')
+        self.add_action(colorblind_action)
+
     def do_activate(self):
         """Called when the application is activated.
 
         We raise the application's main window, creating it if
         necessary.
         """
+        provider = Gtk.CssProvider()
+        provider.load_from_resource('/io/github/nokse22/trivia-quiz/style.css')
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(),
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+
         self.win = self.props.active_window
         if not self.win:
             self.win = TriviaWindow(application=self)
