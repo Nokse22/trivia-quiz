@@ -19,11 +19,9 @@ It uses the [Open Trivia database](https://opentdb.com).
 
 ### From the stores
 
-Trivia Quiz is available to download on Flathub and the Snap Store.
+Trivia Quiz is available to download on Flathub
 
 <a href='https://flathub.org/apps/details/io.github.nokse22.trivia-quiz'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'></a>
-<h>&emsp;</h> <a href="https://snapcraft.io/trivia-quiz"><img height='80' alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg"/></a>
-
 
 ### From source
 
